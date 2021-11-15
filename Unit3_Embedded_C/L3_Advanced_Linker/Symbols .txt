@@ -1,0 +1,49 @@
+startup.o
+         U _E_bss
+         U _E_data
+         U _E_text
+         U _S_bss
+         U _S_data
+         U _stack_top
+00000000 W Bus_Fault_Handler
+00000000 T Default_Handler
+00000000 W H_Fault_Handler
+         U main
+00000000 W MM_Fault_Handler
+00000000 W NMI_Handler
+0000000c T Reset_Handler
+00000000 W Usage_Fault_Handler
+00000000 D vectors
+
+LED_init.o
+00000000 T LED_Init
+00000088 T LED_Off
+00000054 T LED_On
+
+main.o
+0000002c T Delay
+         U LED_Init
+         U LED_Off
+         U LED_On
+00000000 T main
+
+learn_in_depth_cortexM3.elf
+20000000 B _E_bss
+20000000 T _E_data
+080001e0 T _E_text
+20000000 B _S_bss
+20000000 T _S_data
+20001000 B _stack_top
+08000134 W Bus_Fault_Handler
+08000134 T Default_Handler
+08000108 T Delay
+08000134 W H_Fault_Handler
+0800001c T LED_Init
+080000a4 T LED_Off
+08000070 T LED_On
+080000dc T main
+08000134 W MM_Fault_Handler
+08000134 W NMI_Handler
+08000140 T Reset_Handler
+08000134 W Usage_Fault_Handler
+08000000 T vectors
