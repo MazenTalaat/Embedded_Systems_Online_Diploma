@@ -1,0 +1,204 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+PC_State_ID         0x1               obj/main.o
+AC_State_ID         0x1               obj/Alarm_Controller.o
+PS_State_ID         0x1               obj/main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00020000         xr
+SRAM             0x20000000         0x00005000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x08000000      0x3b8
+ *(.vectors*)
+ .vectors       0x08000000       0x10 obj/startup.o
+                0x08000000                g_p_fn_Vectors
+ *(.text*)
+ .text          0x08000010       0x68 obj/Alarm_Controller.o
+                0x08000010                AC_Init
+                0x08000020                ST_AC_Idle
+                0x0800004c                ST_AC_Busy
+ .text          0x08000078      0x10c obj/driver.o
+                0x08000078                Delay
+                0x0800009c                getPressureVal
+                0x080000b4                Set_Alarm_actuator
+                0x08000104                GPIO_INITIALIZATION
+ .text          0x08000184       0x78 obj/main.o
+                0x08000184                setup
+                0x080001c8                main
+ .text          0x080001fc       0xa8 obj/Pressure_Controller.o
+                0x080001fc                PS_Set_Pressure
+                0x08000258                ST_PC_Waiting
+                0x08000274                ST_PC_Alarm
+ .text          0x080002a4       0x60 obj/Pressure_Sensor.o
+                0x080002a4                PS_Init
+                0x080002b0                ST_PS_Busy
+ .text          0x08000304       0xb4 obj/startup.o
+                0x08000304                H_Fault_Handler
+                0x08000304                Default_Handler
+                0x08000304                NMI_Handler
+                0x08000310                Reset_Handler
+ *(.rodata)
+                0x080003b8                _E_text = .
+
+.glue_7         0x080003b8        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x080003b8        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x080003b8        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x080003b8        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x080003b8        0x0
+ .iplt          0x00000000        0x0 obj/Alarm_Controller.o
+
+.rel.dyn        0x080003b8        0x0
+ .rel.iplt      0x00000000        0x0 obj/Alarm_Controller.o
+
+.data           0x20000000        0x4 load address 0x080003b8
+                0x20000000                _S_data = .
+ *(.data)
+ .data          0x20000000        0x0 obj/Alarm_Controller.o
+ .data          0x20000000        0x0 obj/driver.o
+ .data          0x20000000        0x0 obj/main.o
+ .data          0x20000000        0x4 obj/Pressure_Controller.o
+                0x20000000                PC_pressure_threshold
+ .data          0x20000004        0x0 obj/Pressure_Sensor.o
+ .data          0x20000004        0x0 obj/startup.o
+                0x20000004                . = ALIGN (0x4)
+                0x20000004                _E_data = .
+
+.igot.plt       0x20000004        0x0 load address 0x080003bc
+ .igot.plt      0x00000000        0x0 obj/Alarm_Controller.o
+
+.bss            0x20000004      0x417 load address 0x080003bc
+                0x20000004                _S_bss = .
+ *(.bss*)
+ .bss           0x20000004        0x4 obj/Alarm_Controller.o
+                0x20000004                P_AC_state
+ .bss           0x20000008        0x0 obj/driver.o
+ .bss           0x20000008        0x0 obj/main.o
+ .bss           0x20000008        0x8 obj/Pressure_Controller.o
+                0x20000008                PC_pressure
+                0x2000000c                P_PC_state
+ .bss           0x20000010        0x8 obj/Pressure_Sensor.o
+                0x20000010                PS_pressure
+                0x20000014                P_PS_state
+ .bss           0x20000018      0x400 obj/startup.o
+                0x20000418                . = ALIGN (0x4)
+                0x20000418                _E_bss = .
+ COMMON         0x20000418        0x1 obj/Alarm_Controller.o
+                0x20000418                AC_State_ID
+ COMMON         0x20000419        0x2 obj/main.o
+                0x20000419                PC_State_ID
+                0x2000041a                PS_State_ID
+LOAD obj/Alarm_Controller.o
+LOAD obj/driver.o
+LOAD obj/main.o
+LOAD obj/Pressure_Controller.o
+LOAD obj/Pressure_Sensor.o
+LOAD obj/startup.o
+OUTPUT(bin/Project1_Pressure_Controller.elf elf32-littlearm)
+
+.debug_info     0x00000000      0x5f8
+ .debug_info    0x00000000       0xc6 obj/Alarm_Controller.o
+ .debug_info    0x000000c6       0xab obj/driver.o
+ .debug_info    0x00000171       0xfe obj/main.o
+ .debug_info    0x0000026f      0x123 obj/Pressure_Controller.o
+ .debug_info    0x00000392       0xe3 obj/Pressure_Sensor.o
+ .debug_info    0x00000475      0x183 obj/startup.o
+
+.debug_abbrev   0x00000000      0x3ee
+ .debug_abbrev  0x00000000       0x9a obj/Alarm_Controller.o
+ .debug_abbrev  0x0000009a       0x85 obj/driver.o
+ .debug_abbrev  0x0000011f       0x9a obj/main.o
+ .debug_abbrev  0x000001b9       0xc0 obj/Pressure_Controller.o
+ .debug_abbrev  0x00000279       0xad obj/Pressure_Sensor.o
+ .debug_abbrev  0x00000326       0xc8 obj/startup.o
+
+.debug_loc      0x00000000      0x2f0
+ .debug_loc     0x00000000       0x84 obj/Alarm_Controller.o
+ .debug_loc     0x00000084       0xc8 obj/driver.o
+ .debug_loc     0x0000014c       0x58 obj/main.o
+ .debug_loc     0x000001a4       0x90 obj/Pressure_Controller.o
+ .debug_loc     0x00000234       0x58 obj/Pressure_Sensor.o
+ .debug_loc     0x0000028c       0x64 obj/startup.o
+
+.debug_aranges  0x00000000       0xc0
+ .debug_aranges
+                0x00000000       0x20 obj/Alarm_Controller.o
+ .debug_aranges
+                0x00000020       0x20 obj/driver.o
+ .debug_aranges
+                0x00000040       0x20 obj/main.o
+ .debug_aranges
+                0x00000060       0x20 obj/Pressure_Controller.o
+ .debug_aranges
+                0x00000080       0x20 obj/Pressure_Sensor.o
+ .debug_aranges
+                0x000000a0       0x20 obj/startup.o
+
+.debug_line     0x00000000      0x2c2
+ .debug_line    0x00000000       0x6e obj/Alarm_Controller.o
+ .debug_line    0x0000006e       0x58 obj/driver.o
+ .debug_line    0x000000c6       0xa3 obj/main.o
+ .debug_line    0x00000169       0x83 obj/Pressure_Controller.o
+ .debug_line    0x000001ec       0x6a obj/Pressure_Sensor.o
+ .debug_line    0x00000256       0x6c obj/startup.o
+
+.debug_str      0x00000000      0x2a4
+ .debug_str     0x00000000       0xa5 obj/Alarm_Controller.o
+                                 0xb5 (size before relaxing)
+ .debug_str     0x000000a5       0x3d obj/driver.o
+                                 0x96 (size before relaxing)
+ .debug_str     0x000000e2       0x44 obj/main.o
+                                 0xcd (size before relaxing)
+ .debug_str     0x00000126       0x66 obj/Pressure_Controller.o
+                                 0xf0 (size before relaxing)
+ .debug_str     0x0000018c       0x35 obj/Pressure_Sensor.o
+                                 0xbf (size before relaxing)
+ .debug_str     0x000001c1       0xe3 obj/startup.o
+                                0x15d (size before relaxing)
+
+.comment        0x00000000       0x11
+ .comment       0x00000000       0x11 obj/Alarm_Controller.o
+                                 0x12 (size before relaxing)
+ .comment       0x00000000       0x12 obj/driver.o
+ .comment       0x00000000       0x12 obj/main.o
+ .comment       0x00000000       0x12 obj/Pressure_Controller.o
+ .comment       0x00000000       0x12 obj/Pressure_Sensor.o
+ .comment       0x00000000       0x12 obj/startup.o
+
+.ARM.attributes
+                0x00000000       0x33
+ .ARM.attributes
+                0x00000000       0x33 obj/Alarm_Controller.o
+ .ARM.attributes
+                0x00000033       0x33 obj/driver.o
+ .ARM.attributes
+                0x00000066       0x33 obj/main.o
+ .ARM.attributes
+                0x00000099       0x33 obj/Pressure_Controller.o
+ .ARM.attributes
+                0x000000cc       0x33 obj/Pressure_Sensor.o
+ .ARM.attributes
+                0x000000ff       0x33 obj/startup.o
+
+.debug_frame    0x00000000      0x210
+ .debug_frame   0x00000000       0x5c obj/Alarm_Controller.o
+ .debug_frame   0x0000005c       0x78 obj/driver.o
+ .debug_frame   0x000000d4       0x48 obj/main.o
+ .debug_frame   0x0000011c       0x64 obj/Pressure_Controller.o
+ .debug_frame   0x00000180       0x44 obj/Pressure_Sensor.o
+ .debug_frame   0x000001c4       0x4c obj/startup.o
