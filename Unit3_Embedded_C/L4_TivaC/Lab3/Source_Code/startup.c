@@ -44,7 +44,7 @@ void Reset_Handler(void)
 	int i;
 	/* copying data from ROM to RAM */
 	for(i=0; i<data_size; i++){
-		*((unsigned char*)P_dst++) = *((unsigned char*)P_src);
+		*((unsigned char*)P_dst++) = *((unsigned char*)P_src++);
 	}
 	unsigned int bss_size = (unsigned char*)&_E_bss - (unsigned char*)&_S_bss;
 	/*Initializing .bss with zeros */

@@ -47,7 +47,7 @@ void Reset_Handler(void)
 	unsigned char* P_dst = (unsigned char*)&_S_data;
 	int i;
 	for(i=0; i<data_size; i++){
-		*((unsigned char*)P_dst++) = *((unsigned char*)P_src);
+		*((unsigned char*)P_dst++) = *((unsigned char*)P_src++);
 	}
 	unsigned int bss_size = (unsigned char*)&_E_bss - (unsigned char*)&_S_bss;
 	for(i=0; i<bss_size; i++){
