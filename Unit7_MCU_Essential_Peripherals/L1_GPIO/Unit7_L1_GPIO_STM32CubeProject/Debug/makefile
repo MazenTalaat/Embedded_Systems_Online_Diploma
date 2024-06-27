@@ -33,34 +33,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := Unit6_L4_Lab1_Interrupts_STM32CubeProject
+BUILD_ARTIFACT_NAME := Unit7_L1_GPIO_STM32CubeProject
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-Unit6_L4_Lab1_Interrupts_STM32CubeProject.elf \
+Unit7_L1_GPIO_STM32CubeProject.elf \
 
 MAP_FILES += \
-Unit6_L4_Lab1_Interrupts_STM32CubeProject.map \
+Unit7_L1_GPIO_STM32CubeProject.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-Unit6_L4_Lab1_Interrupts_STM32CubeProject.list \
+Unit7_L1_GPIO_STM32CubeProject.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: Unit6_L4_Lab1_Interrupts_STM32CubeProject.elf secondary-outputs
+main-build: Unit7_L1_GPIO_STM32CubeProject.elf secondary-outputs
 
 # Tool invocations
-Unit6_L4_Lab1_Interrupts_STM32CubeProject.elf Unit6_L4_Lab1_Interrupts_STM32CubeProject.map: $(OBJS) $(USER_OBJS) D:\Studying\Embedded_KS\STM32CubeWorkSpace\Unit6_L4_Lab1_Interrupts_STM32CubeProject\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Unit6_L4_Lab1_Interrupts_STM32CubeProject.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Studying\Embedded_KS\STM32CubeWorkSpace\Unit6_L4_Lab1_Interrupts_STM32CubeProject\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Unit6_L4_Lab1_Interrupts_STM32CubeProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Unit7_L1_GPIO_STM32CubeProject.elf Unit7_L1_GPIO_STM32CubeProject.map: $(OBJS) $(USER_OBJS) D:\Studying\Embedded_KS\STM32CubeWorkSpace\Unit7_L1_GPIO_STM32CubeProject\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Unit7_L1_GPIO_STM32CubeProject.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Studying\Embedded_KS\STM32CubeWorkSpace\Unit7_L1_GPIO_STM32CubeProject\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Unit7_L1_GPIO_STM32CubeProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -69,14 +69,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Unit6_L4_Lab1_Interrupts_STM32CubeProject.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Unit6_L4_Lab1_Interrupts_STM32CubeProject.list"
+Unit7_L1_GPIO_STM32CubeProject.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Unit7_L1_GPIO_STM32CubeProject.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) Unit6_L4_Lab1_Interrupts_STM32CubeProject.elf Unit6_L4_Lab1_Interrupts_STM32CubeProject.list Unit6_L4_Lab1_Interrupts_STM32CubeProject.map default.size.stdout
+	-$(RM) Unit7_L1_GPIO_STM32CubeProject.elf Unit7_L1_GPIO_STM32CubeProject.list Unit7_L1_GPIO_STM32CubeProject.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
