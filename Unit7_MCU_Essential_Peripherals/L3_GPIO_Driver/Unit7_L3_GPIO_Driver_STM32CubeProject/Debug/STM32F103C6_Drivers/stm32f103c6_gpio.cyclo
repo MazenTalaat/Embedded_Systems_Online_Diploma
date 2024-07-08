@@ -1,0 +1,10 @@
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:17:6:MCAL_GPIO_init	13
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:105:6:MCAL_GPIO_deInit	5
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:124:7:MCAL_GPIO_readPin	2
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:133:8:MCAL_GPIO_readPort	1
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:137:6:MCAL_GPIO_writePin	2
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:144:6:MCAL_GPIO_writePort	1
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:148:6:MCAL_GPIO_togglePin	1
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:152:7:MCAL_GPIO_lockPin	2
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:177:5:isOutput	5
+../STM32F103C6_Drivers/stm32f103c6_gpio.c:189:7:getCRLH_Position	28
