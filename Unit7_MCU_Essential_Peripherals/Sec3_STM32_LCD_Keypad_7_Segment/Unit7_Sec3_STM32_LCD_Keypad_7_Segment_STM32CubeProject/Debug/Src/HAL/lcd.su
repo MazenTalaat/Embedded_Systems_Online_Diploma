@@ -1,0 +1,11 @@
+../Src/HAL/lcd.c:25:6:LCD_init	16	static
+../Src/HAL/lcd.c:56:6:LCD_sendCommand	16	static
+../Src/HAL/lcd.c:94:6:LCD_displayCharacter	16	static
+../Src/HAL/lcd.c:132:6:LCD_displayString	24	static
+../Src/HAL/lcd.c:144:6:LCD_moveCursor	24	static
+../Src/HAL/lcd.c:170:6:LCD_displayStringRowColumn	16	static
+../Src/HAL/lcd.c:175:6:LCD_shiftDisplayRight	8	static
+../Src/HAL/lcd.c:179:6:LCD_shiftDisplayLeft	8	static
+../Src/HAL/lcd.c:187:6:LCD_intgerToString	32	static
+../Src/HAL/lcd.c:197:6:LCD_floatToString	24	static
+../Src/HAL/lcd.c:209:6:LCD_clearScreen	8	static
