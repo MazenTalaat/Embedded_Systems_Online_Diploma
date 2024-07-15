@@ -1,0 +1,8 @@
+../MCAL/stm32f103c6_usart.c:26:6:MCAL_UART_init	9
+../MCAL/stm32f103c6_usart.c:95:6:MCAL_UART_deInit	4
+../MCAL/stm32f103c6_usart.c:112:6:MCAL_UART_GPIO_setPins	4
+../MCAL/stm32f103c6_usart.c:223:6:MCAL_UART_sendData	3
+../MCAL/stm32f103c6_usart.c:241:6:MCAL_UART_receiveData	4
+../MCAL/stm32f103c6_usart.c:276:6:USART1_IRQHandler	1
+../MCAL/stm32f103c6_usart.c:280:6:USART2_IRQHandler	1
+../MCAL/stm32f103c6_usart.c:284:6:USART3_IRQHandler	1
