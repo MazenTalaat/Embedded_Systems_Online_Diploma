@@ -1,0 +1,8 @@
+../MCAL/stm32f103c6_usart.c:29:6:MCAL_UART_init	24	static
+../MCAL/stm32f103c6_usart.c:96:6:MCAL_UART_deInit	16	static
+../MCAL/stm32f103c6_usart.c:113:6:MCAL_UART_GPIO_setPins	24	static
+../MCAL/stm32f103c6_usart.c:230:6:MCAL_UART_sendData	32	static
+../MCAL/stm32f103c6_usart.c:252:6:MCAL_UART_receiveData	32	static
+../MCAL/stm32f103c6_usart.c:286:6:USART1_IRQHandler	8	static
+../MCAL/stm32f103c6_usart.c:290:6:USART2_IRQHandler	8	static
+../MCAL/stm32f103c6_usart.c:294:6:USART3_IRQHandler	8	static
