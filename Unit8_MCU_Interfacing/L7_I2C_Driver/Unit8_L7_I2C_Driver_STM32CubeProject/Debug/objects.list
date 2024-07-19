@@ -1,0 +1,8 @@
+"./HAL/eeprom_i2c.o"
+"./MCAL/stm32f103c8_gpio.o"
+"./MCAL/stm32f103c8_i2c.o"
+"./MCAL/stm32f103c8_rcc.o"
+"./Src/main.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Startup/startup_stm32f103c6tx.o"

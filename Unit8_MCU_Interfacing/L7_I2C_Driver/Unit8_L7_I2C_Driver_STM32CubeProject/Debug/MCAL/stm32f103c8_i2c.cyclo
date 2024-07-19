@@ -1,0 +1,17 @@
+../MCAL/stm32f103c8_i2c.c:29:6:MCAL_I2C_init	16
+../MCAL/stm32f103c8_i2c.c:140:6:MCAL_I2C_deInit	3
+../MCAL/stm32f103c8_i2c.c:154:6:MCAL_I2C_GPIO_setPins	3
+../MCAL/stm32f103c8_i2c.c:196:6:MCAL_I2C_masterTx	7
+../MCAL/stm32f103c8_i2c.c:246:6:MCAL_I2C_masterRx	10
+../MCAL/stm32f103c8_i2c.c:303:6:MCAL_I2C_saveTx	1
+../MCAL/stm32f103c8_i2c.c:310:6:MCAL_I2C_slaveRx	1
+../MCAL/stm32f103c8_i2c.c:318:6:I2C_sendAddress	2
+../MCAL/stm32f103c8_i2c.c:336:6:I2C_generateStart	3
+../MCAL/stm32f103c8_i2c.c:349:6:I2C_generateStop	1
+../MCAL/stm32f103c8_i2c.c:357:6:I2C_ACK_control	2
+../MCAL/stm32f103c8_i2c.c:370:7:I2C_getFlagStatus	10
+../MCAL/stm32f103c8_i2c.c:494:14:I2C_IRQ_type	14
+../MCAL/stm32f103c8_i2c.c:534:6:I2C1_EV_IRQHandler	10
+../MCAL/stm32f103c8_i2c.c:579:6:I2C1_ER_IRQHandler	1
+../MCAL/stm32f103c8_i2c.c:583:6:I2C2_EV_IRQHandler	12
+../MCAL/stm32f103c8_i2c.c:635:6:I2C2_ER_IRQHandler	1

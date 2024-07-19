@@ -1,0 +1,4 @@
+../MCAL/stm32f103c8_rcc.c:23:8:MCAL_RCC_getSysCLKFreq	4	static
+../MCAL/stm32f103c8_rcc.c:50:8:MCAL_RCC_getHCLKFreq	8	static
+../MCAL/stm32f103c8_rcc.c:58:8:MCAL_RCC_getPCLK1Freq	8	static
+../MCAL/stm32f103c8_rcc.c:66:8:MCAL_RCC_getPCLK2Freq	8	static
