@@ -1,0 +1,1075 @@
+
+Unit9_Sec1_Lab1_Timer0_EclipseProject.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000067e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          0000000e  00800060  00800060  000006f2  2**0
+                  ALLOC
+  2 .debug_aranges 000000f0  00000000  00000000  000006f2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 0000024c  00000000  00000000  000007e2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000068a  00000000  00000000  00000a2e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000026e  00000000  00000000  000010b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000007ce  00000000  00000000  00001326  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000180  00000000  00000000  00001af4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000379  00000000  00000000  00001c74  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 000000d8  00000000  00000000  00001fed  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 63 02 	jmp	0x4c6	; 0x4c6 <__vector_10>
+  2c:	0c 94 90 02 	jmp	0x520	; 0x520 <__vector_11>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	ae 36       	cpi	r26, 0x6E	; 110
+  6c:	b1 07       	cpc	r27, r17
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 0e 03 	call	0x61c	; 0x61c <main>
+  74:	0c 94 3d 03 	jmp	0x67a	; 0x67a <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <MCAL_GPIO_init>:
+// Functions Definitions
+//*****************************************************************************
+// @brief Setup the mode of the required pin/port.
+// @param[in]  GPIOx  The port to be configured.
+// @param[in]  pinConfig  The pin/port configuration.
+void MCAL_GPIO_init(GPIO_TypeDef *GPIOx, GPIO_PinConfig *pinConfig) {
+  7c:	df 93       	push	r29
+  7e:	cf 93       	push	r28
+  80:	cd b7       	in	r28, 0x3d	; 61
+  82:	de b7       	in	r29, 0x3e	; 62
+  84:	28 97       	sbiw	r28, 0x08	; 8
+  86:	0f b6       	in	r0, 0x3f	; 63
+  88:	f8 94       	cli
+  8a:	de bf       	out	0x3e, r29	; 62
+  8c:	0f be       	out	0x3f, r0	; 63
+  8e:	cd bf       	out	0x3d, r28	; 61
+  90:	9a 83       	std	Y+2, r25	; 0x02
+  92:	89 83       	std	Y+1, r24	; 0x01
+  94:	7c 83       	std	Y+4, r23	; 0x04
+  96:	6b 83       	std	Y+3, r22	; 0x03
+	if (pinConfig->GPIO_pinNumber == GPIO_PIN_All) {
+  98:	eb 81       	ldd	r30, Y+3	; 0x03
+  9a:	fc 81       	ldd	r31, Y+4	; 0x04
+  9c:	80 81       	ld	r24, Z
+  9e:	8f 3f       	cpi	r24, 0xFF	; 255
+  a0:	59 f5       	brne	.+86     	; 0xf8 <MCAL_GPIO_init+0x7c>
+		switch (pinConfig->GPIO_pinMode) {
+  a2:	eb 81       	ldd	r30, Y+3	; 0x03
+  a4:	fc 81       	ldd	r31, Y+4	; 0x04
+  a6:	81 81       	ldd	r24, Z+1	; 0x01
+  a8:	28 2f       	mov	r18, r24
+  aa:	30 e0       	ldi	r19, 0x00	; 0
+  ac:	38 87       	std	Y+8, r19	; 0x08
+  ae:	2f 83       	std	Y+7, r18	; 0x07
+  b0:	8f 81       	ldd	r24, Y+7	; 0x07
+  b2:	98 85       	ldd	r25, Y+8	; 0x08
+  b4:	82 30       	cpi	r24, 0x02	; 2
+  b6:	91 05       	cpc	r25, r1
+  b8:	99 f0       	breq	.+38     	; 0xe0 <MCAL_GPIO_init+0x64>
+  ba:	2f 81       	ldd	r18, Y+7	; 0x07
+  bc:	38 85       	ldd	r19, Y+8	; 0x08
+  be:	23 30       	cpi	r18, 0x03	; 3
+  c0:	31 05       	cpc	r19, r1
+  c2:	a9 f0       	breq	.+42     	; 0xee <MCAL_GPIO_init+0x72>
+  c4:	8f 81       	ldd	r24, Y+7	; 0x07
+  c6:	98 85       	ldd	r25, Y+8	; 0x08
+  c8:	81 30       	cpi	r24, 0x01	; 1
+  ca:	91 05       	cpc	r25, r1
+  cc:	09 f0       	breq	.+2      	; 0xd0 <MCAL_GPIO_init+0x54>
+  ce:	64 c0       	rjmp	.+200    	; 0x198 <MCAL_GPIO_init+0x11c>
+		case GPIO_MODE_IN_PULL_UP:
+			// DDR -> 0 Input
+			// PORT -> 1 Pull-up
+			GPIOx->DDR = (uint8) 0x00;
+  d0:	e9 81       	ldd	r30, Y+1	; 0x01
+  d2:	fa 81       	ldd	r31, Y+2	; 0x02
+  d4:	11 82       	std	Z+1, r1	; 0x01
+			GPIOx->PORT = (uint8) 0xFF;
+  d6:	e9 81       	ldd	r30, Y+1	; 0x01
+  d8:	fa 81       	ldd	r31, Y+2	; 0x02
+  da:	8f ef       	ldi	r24, 0xFF	; 255
+  dc:	82 83       	std	Z+2, r24	; 0x02
+  de:	5c c0       	rjmp	.+184    	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		case GPIO_MODE_IN_FLOATING:
+			// DDR -> 0 Input
+			// PORT -> 0 Pull-down
+			GPIOx->DDR = (uint8) 0x00;
+  e0:	e9 81       	ldd	r30, Y+1	; 0x01
+  e2:	fa 81       	ldd	r31, Y+2	; 0x02
+  e4:	11 82       	std	Z+1, r1	; 0x01
+			GPIOx->PORT = (uint8) 0x00;
+  e6:	e9 81       	ldd	r30, Y+1	; 0x01
+  e8:	fa 81       	ldd	r31, Y+2	; 0x02
+  ea:	12 82       	std	Z+2, r1	; 0x02
+  ec:	55 c0       	rjmp	.+170    	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		case GPIO_MODE_OUT:
+			// DDR -> 1 Output
+			GPIOx->DDR = (uint8) 0xFF;
+  ee:	e9 81       	ldd	r30, Y+1	; 0x01
+  f0:	fa 81       	ldd	r31, Y+2	; 0x02
+  f2:	8f ef       	ldi	r24, 0xFF	; 255
+  f4:	81 83       	std	Z+1, r24	; 0x01
+  f6:	50 c0       	rjmp	.+160    	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		default:
+			break;
+		}
+	} else {
+		switch (pinConfig->GPIO_pinMode) {
+  f8:	eb 81       	ldd	r30, Y+3	; 0x03
+  fa:	fc 81       	ldd	r31, Y+4	; 0x04
+  fc:	81 81       	ldd	r24, Z+1	; 0x01
+  fe:	28 2f       	mov	r18, r24
+ 100:	30 e0       	ldi	r19, 0x00	; 0
+ 102:	3e 83       	std	Y+6, r19	; 0x06
+ 104:	2d 83       	std	Y+5, r18	; 0x05
+ 106:	8d 81       	ldd	r24, Y+5	; 0x05
+ 108:	9e 81       	ldd	r25, Y+6	; 0x06
+ 10a:	82 30       	cpi	r24, 0x02	; 2
+ 10c:	91 05       	cpc	r25, r1
+ 10e:	09 f1       	breq	.+66     	; 0x152 <MCAL_GPIO_init+0xd6>
+ 110:	2d 81       	ldd	r18, Y+5	; 0x05
+ 112:	3e 81       	ldd	r19, Y+6	; 0x06
+ 114:	23 30       	cpi	r18, 0x03	; 3
+ 116:	31 05       	cpc	r19, r1
+ 118:	a9 f1       	breq	.+106    	; 0x184 <MCAL_GPIO_init+0x108>
+ 11a:	8d 81       	ldd	r24, Y+5	; 0x05
+ 11c:	9e 81       	ldd	r25, Y+6	; 0x06
+ 11e:	81 30       	cpi	r24, 0x01	; 1
+ 120:	91 05       	cpc	r25, r1
+ 122:	d1 f5       	brne	.+116    	; 0x198 <MCAL_GPIO_init+0x11c>
+		case GPIO_MODE_IN_PULL_UP:
+			// DDR -> 0 Input
+			// PORT -> 1 Pull-up
+			GPIOx->DDR &= ~pinConfig->GPIO_pinNumber;
+ 124:	e9 81       	ldd	r30, Y+1	; 0x01
+ 126:	fa 81       	ldd	r31, Y+2	; 0x02
+ 128:	81 81       	ldd	r24, Z+1	; 0x01
+ 12a:	98 2f       	mov	r25, r24
+ 12c:	eb 81       	ldd	r30, Y+3	; 0x03
+ 12e:	fc 81       	ldd	r31, Y+4	; 0x04
+ 130:	80 81       	ld	r24, Z
+ 132:	80 95       	com	r24
+ 134:	89 23       	and	r24, r25
+ 136:	e9 81       	ldd	r30, Y+1	; 0x01
+ 138:	fa 81       	ldd	r31, Y+2	; 0x02
+ 13a:	81 83       	std	Z+1, r24	; 0x01
+			GPIOx->PORT |= pinConfig->GPIO_pinNumber;
+ 13c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 13e:	fa 81       	ldd	r31, Y+2	; 0x02
+ 140:	92 81       	ldd	r25, Z+2	; 0x02
+ 142:	eb 81       	ldd	r30, Y+3	; 0x03
+ 144:	fc 81       	ldd	r31, Y+4	; 0x04
+ 146:	80 81       	ld	r24, Z
+ 148:	89 2b       	or	r24, r25
+ 14a:	e9 81       	ldd	r30, Y+1	; 0x01
+ 14c:	fa 81       	ldd	r31, Y+2	; 0x02
+ 14e:	82 83       	std	Z+2, r24	; 0x02
+ 150:	23 c0       	rjmp	.+70     	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		case GPIO_MODE_IN_FLOATING:
+			// DDR -> 0 Input
+			// PORT -> 0 Pull-down
+			GPIOx->DDR &= ~pinConfig->GPIO_pinNumber;
+ 152:	e9 81       	ldd	r30, Y+1	; 0x01
+ 154:	fa 81       	ldd	r31, Y+2	; 0x02
+ 156:	81 81       	ldd	r24, Z+1	; 0x01
+ 158:	98 2f       	mov	r25, r24
+ 15a:	eb 81       	ldd	r30, Y+3	; 0x03
+ 15c:	fc 81       	ldd	r31, Y+4	; 0x04
+ 15e:	80 81       	ld	r24, Z
+ 160:	80 95       	com	r24
+ 162:	89 23       	and	r24, r25
+ 164:	e9 81       	ldd	r30, Y+1	; 0x01
+ 166:	fa 81       	ldd	r31, Y+2	; 0x02
+ 168:	81 83       	std	Z+1, r24	; 0x01
+			GPIOx->PORT &= ~pinConfig->GPIO_pinNumber;
+ 16a:	e9 81       	ldd	r30, Y+1	; 0x01
+ 16c:	fa 81       	ldd	r31, Y+2	; 0x02
+ 16e:	82 81       	ldd	r24, Z+2	; 0x02
+ 170:	98 2f       	mov	r25, r24
+ 172:	eb 81       	ldd	r30, Y+3	; 0x03
+ 174:	fc 81       	ldd	r31, Y+4	; 0x04
+ 176:	80 81       	ld	r24, Z
+ 178:	80 95       	com	r24
+ 17a:	89 23       	and	r24, r25
+ 17c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 17e:	fa 81       	ldd	r31, Y+2	; 0x02
+ 180:	82 83       	std	Z+2, r24	; 0x02
+ 182:	0a c0       	rjmp	.+20     	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		case GPIO_MODE_OUT:
+			// DDR -> 1 Output
+			GPIOx->DDR |= pinConfig->GPIO_pinNumber;
+ 184:	e9 81       	ldd	r30, Y+1	; 0x01
+ 186:	fa 81       	ldd	r31, Y+2	; 0x02
+ 188:	91 81       	ldd	r25, Z+1	; 0x01
+ 18a:	eb 81       	ldd	r30, Y+3	; 0x03
+ 18c:	fc 81       	ldd	r31, Y+4	; 0x04
+ 18e:	80 81       	ld	r24, Z
+ 190:	89 2b       	or	r24, r25
+ 192:	e9 81       	ldd	r30, Y+1	; 0x01
+ 194:	fa 81       	ldd	r31, Y+2	; 0x02
+ 196:	81 83       	std	Z+1, r24	; 0x01
+			break;
+		default:
+			break;
+		}
+	}
+}
+ 198:	28 96       	adiw	r28, 0x08	; 8
+ 19a:	0f b6       	in	r0, 0x3f	; 63
+ 19c:	f8 94       	cli
+ 19e:	de bf       	out	0x3e, r29	; 62
+ 1a0:	0f be       	out	0x3f, r0	; 63
+ 1a2:	cd bf       	out	0x3d, r28	; 61
+ 1a4:	cf 91       	pop	r28
+ 1a6:	df 91       	pop	r29
+ 1a8:	08 95       	ret
+
+000001aa <MCAL_GPIO_deInit>:
+
+// @brief Reset the port configuration.
+// @param[in]  GPIOx  The port to be reset.
+void MCAL_GPIO_deInit(GPIO_TypeDef *GPIOx) {
+ 1aa:	df 93       	push	r29
+ 1ac:	cf 93       	push	r28
+ 1ae:	00 d0       	rcall	.+0      	; 0x1b0 <MCAL_GPIO_deInit+0x6>
+ 1b0:	cd b7       	in	r28, 0x3d	; 61
+ 1b2:	de b7       	in	r29, 0x3e	; 62
+ 1b4:	9a 83       	std	Y+2, r25	; 0x02
+ 1b6:	89 83       	std	Y+1, r24	; 0x01
+	// Reset values
+	GPIOx->DDR = (uint8) 0xFF;
+ 1b8:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1ba:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1bc:	8f ef       	ldi	r24, 0xFF	; 255
+ 1be:	81 83       	std	Z+1, r24	; 0x01
+	GPIOx->PORT = (uint8) 0xFF;
+ 1c0:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1c2:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1c4:	8f ef       	ldi	r24, 0xFF	; 255
+ 1c6:	82 83       	std	Z+2, r24	; 0x02
+}
+ 1c8:	0f 90       	pop	r0
+ 1ca:	0f 90       	pop	r0
+ 1cc:	cf 91       	pop	r28
+ 1ce:	df 91       	pop	r29
+ 1d0:	08 95       	ret
+
+000001d2 <MCAL_GPIO_readPin>:
+
+// @brief Read the pin value.
+// @param[in]  GPIOx  The port to be used.
+// @param[in]  pinNumber  The pin number.
+// @return The pin value.
+uint8 MCAL_GPIO_readPin(GPIO_TypeDef *GPIOx, uint8 pinNumber) {
+ 1d2:	df 93       	push	r29
+ 1d4:	cf 93       	push	r28
+ 1d6:	00 d0       	rcall	.+0      	; 0x1d8 <MCAL_GPIO_readPin+0x6>
+ 1d8:	00 d0       	rcall	.+0      	; 0x1da <MCAL_GPIO_readPin+0x8>
+ 1da:	cd b7       	in	r28, 0x3d	; 61
+ 1dc:	de b7       	in	r29, 0x3e	; 62
+ 1de:	9a 83       	std	Y+2, r25	; 0x02
+ 1e0:	89 83       	std	Y+1, r24	; 0x01
+ 1e2:	6b 83       	std	Y+3, r22	; 0x03
+	if ((GPIOx->PIN & pinNumber) == LOGIC_LOW) {
+ 1e4:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1e6:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1e8:	90 81       	ld	r25, Z
+ 1ea:	8b 81       	ldd	r24, Y+3	; 0x03
+ 1ec:	89 23       	and	r24, r25
+ 1ee:	88 23       	and	r24, r24
+ 1f0:	11 f4       	brne	.+4      	; 0x1f6 <MCAL_GPIO_readPin+0x24>
+		return LOGIC_LOW;
+ 1f2:	1c 82       	std	Y+4, r1	; 0x04
+ 1f4:	02 c0       	rjmp	.+4      	; 0x1fa <MCAL_GPIO_readPin+0x28>
+	} else {
+		return LOGIC_HIGH;
+ 1f6:	81 e0       	ldi	r24, 0x01	; 1
+ 1f8:	8c 83       	std	Y+4, r24	; 0x04
+ 1fa:	8c 81       	ldd	r24, Y+4	; 0x04
+	}
+	return LOGIC_LOW;
+}
+ 1fc:	0f 90       	pop	r0
+ 1fe:	0f 90       	pop	r0
+ 200:	0f 90       	pop	r0
+ 202:	0f 90       	pop	r0
+ 204:	cf 91       	pop	r28
+ 206:	df 91       	pop	r29
+ 208:	08 95       	ret
+
+0000020a <MCAL_GPIO_readPort>:
+
+// @brief Read the port value.
+// @param[in]  GPIOx  The port to be read.
+// @return The port value.
+uint8 MCAL_GPIO_readPort(GPIO_TypeDef *GPIOx) {
+ 20a:	df 93       	push	r29
+ 20c:	cf 93       	push	r28
+ 20e:	00 d0       	rcall	.+0      	; 0x210 <MCAL_GPIO_readPort+0x6>
+ 210:	cd b7       	in	r28, 0x3d	; 61
+ 212:	de b7       	in	r29, 0x3e	; 62
+ 214:	9a 83       	std	Y+2, r25	; 0x02
+ 216:	89 83       	std	Y+1, r24	; 0x01
+	return (uint8) (GPIOx->PIN & 0xFF);
+ 218:	e9 81       	ldd	r30, Y+1	; 0x01
+ 21a:	fa 81       	ldd	r31, Y+2	; 0x02
+ 21c:	80 81       	ld	r24, Z
+}
+ 21e:	0f 90       	pop	r0
+ 220:	0f 90       	pop	r0
+ 222:	cf 91       	pop	r28
+ 224:	df 91       	pop	r29
+ 226:	08 95       	ret
+
+00000228 <MCAL_GPIO_writePin>:
+
+// @brief Set a pin to a value.
+// @param[in]  GPIOx  The port to be used.
+// @param[in]  pinNumber  The pin number.
+// @param[in]  value  The value to be set.
+void MCAL_GPIO_writePin(GPIO_TypeDef *GPIOx, uint8 pinNumber, uint8 value) {
+ 228:	df 93       	push	r29
+ 22a:	cf 93       	push	r28
+ 22c:	00 d0       	rcall	.+0      	; 0x22e <MCAL_GPIO_writePin+0x6>
+ 22e:	00 d0       	rcall	.+0      	; 0x230 <MCAL_GPIO_writePin+0x8>
+ 230:	cd b7       	in	r28, 0x3d	; 61
+ 232:	de b7       	in	r29, 0x3e	; 62
+ 234:	9a 83       	std	Y+2, r25	; 0x02
+ 236:	89 83       	std	Y+1, r24	; 0x01
+ 238:	6b 83       	std	Y+3, r22	; 0x03
+ 23a:	4c 83       	std	Y+4, r20	; 0x04
+	if (value == LOGIC_LOW) {
+ 23c:	8c 81       	ldd	r24, Y+4	; 0x04
+ 23e:	88 23       	and	r24, r24
+ 240:	59 f4       	brne	.+22     	; 0x258 <MCAL_GPIO_writePin+0x30>
+		GPIOx->PORT &= ~pinNumber;
+ 242:	e9 81       	ldd	r30, Y+1	; 0x01
+ 244:	fa 81       	ldd	r31, Y+2	; 0x02
+ 246:	82 81       	ldd	r24, Z+2	; 0x02
+ 248:	98 2f       	mov	r25, r24
+ 24a:	8b 81       	ldd	r24, Y+3	; 0x03
+ 24c:	80 95       	com	r24
+ 24e:	89 23       	and	r24, r25
+ 250:	e9 81       	ldd	r30, Y+1	; 0x01
+ 252:	fa 81       	ldd	r31, Y+2	; 0x02
+ 254:	82 83       	std	Z+2, r24	; 0x02
+ 256:	08 c0       	rjmp	.+16     	; 0x268 <MCAL_GPIO_writePin+0x40>
+	} else {
+		GPIOx->PORT |= pinNumber;
+ 258:	e9 81       	ldd	r30, Y+1	; 0x01
+ 25a:	fa 81       	ldd	r31, Y+2	; 0x02
+ 25c:	92 81       	ldd	r25, Z+2	; 0x02
+ 25e:	8b 81       	ldd	r24, Y+3	; 0x03
+ 260:	89 2b       	or	r24, r25
+ 262:	e9 81       	ldd	r30, Y+1	; 0x01
+ 264:	fa 81       	ldd	r31, Y+2	; 0x02
+ 266:	82 83       	std	Z+2, r24	; 0x02
+	}
+}
+ 268:	0f 90       	pop	r0
+ 26a:	0f 90       	pop	r0
+ 26c:	0f 90       	pop	r0
+ 26e:	0f 90       	pop	r0
+ 270:	cf 91       	pop	r28
+ 272:	df 91       	pop	r29
+ 274:	08 95       	ret
+
+00000276 <MCAL_GPIO_writePort>:
+
+// @brief Set a port to a value.
+// @param[in]  GPIOx  The port to be set.
+// @param[in]  value  The value to be set.
+void MCAL_GPIO_writePort(GPIO_TypeDef *GPIOx, uint8 value) {
+ 276:	df 93       	push	r29
+ 278:	cf 93       	push	r28
+ 27a:	00 d0       	rcall	.+0      	; 0x27c <MCAL_GPIO_writePort+0x6>
+ 27c:	0f 92       	push	r0
+ 27e:	cd b7       	in	r28, 0x3d	; 61
+ 280:	de b7       	in	r29, 0x3e	; 62
+ 282:	9a 83       	std	Y+2, r25	; 0x02
+ 284:	89 83       	std	Y+1, r24	; 0x01
+ 286:	6b 83       	std	Y+3, r22	; 0x03
+	GPIOx->PORT = (uint8) value;
+ 288:	e9 81       	ldd	r30, Y+1	; 0x01
+ 28a:	fa 81       	ldd	r31, Y+2	; 0x02
+ 28c:	8b 81       	ldd	r24, Y+3	; 0x03
+ 28e:	82 83       	std	Z+2, r24	; 0x02
+}
+ 290:	0f 90       	pop	r0
+ 292:	0f 90       	pop	r0
+ 294:	0f 90       	pop	r0
+ 296:	cf 91       	pop	r28
+ 298:	df 91       	pop	r29
+ 29a:	08 95       	ret
+
+0000029c <MCAL_GPIO_togglePin>:
+
+// @brief Toggle a pin.
+// @param[in]  GPIOx  The port to be used.
+// @param[in]  pinNumber  The pin number.
+void MCAL_GPIO_togglePin(GPIO_TypeDef *GPIOx, uint8 pinNumber) {
+ 29c:	df 93       	push	r29
+ 29e:	cf 93       	push	r28
+ 2a0:	00 d0       	rcall	.+0      	; 0x2a2 <MCAL_GPIO_togglePin+0x6>
+ 2a2:	0f 92       	push	r0
+ 2a4:	cd b7       	in	r28, 0x3d	; 61
+ 2a6:	de b7       	in	r29, 0x3e	; 62
+ 2a8:	9a 83       	std	Y+2, r25	; 0x02
+ 2aa:	89 83       	std	Y+1, r24	; 0x01
+ 2ac:	6b 83       	std	Y+3, r22	; 0x03
+	GPIOx->PORT ^= pinNumber;
+ 2ae:	e9 81       	ldd	r30, Y+1	; 0x01
+ 2b0:	fa 81       	ldd	r31, Y+2	; 0x02
+ 2b2:	92 81       	ldd	r25, Z+2	; 0x02
+ 2b4:	8b 81       	ldd	r24, Y+3	; 0x03
+ 2b6:	89 27       	eor	r24, r25
+ 2b8:	e9 81       	ldd	r30, Y+1	; 0x01
+ 2ba:	fa 81       	ldd	r31, Y+2	; 0x02
+ 2bc:	82 83       	std	Z+2, r24	; 0x02
+}
+ 2be:	0f 90       	pop	r0
+ 2c0:	0f 90       	pop	r0
+ 2c2:	0f 90       	pop	r0
+ 2c4:	cf 91       	pop	r28
+ 2c6:	df 91       	pop	r29
+ 2c8:	08 95       	ret
+
+000002ca <MCAL_TIM0_init>:
+//*****************************************************************************
+// Functions Definitions
+//*****************************************************************************
+// @brief Initialize the TIM0 device.
+// @param[in]  TIM0_config 	The needed configuration.
+void MCAL_TIM0_init(TIM0_Config *TIM0_config) {
+ 2ca:	df 93       	push	r29
+ 2cc:	cf 93       	push	r28
+ 2ce:	cd b7       	in	r28, 0x3d	; 61
+ 2d0:	de b7       	in	r29, 0x3e	; 62
+ 2d2:	27 97       	sbiw	r28, 0x07	; 7
+ 2d4:	0f b6       	in	r0, 0x3f	; 63
+ 2d6:	f8 94       	cli
+ 2d8:	de bf       	out	0x3e, r29	; 62
+ 2da:	0f be       	out	0x3f, r0	; 63
+ 2dc:	cd bf       	out	0x3d, r28	; 61
+ 2de:	9a 83       	std	Y+2, r25	; 0x02
+ 2e0:	89 83       	std	Y+1, r24	; 0x01
+	TIM0_g_config = *TIM0_config;
+ 2e2:	89 81       	ldd	r24, Y+1	; 0x01
+ 2e4:	9a 81       	ldd	r25, Y+2	; 0x02
+ 2e6:	29 e6       	ldi	r18, 0x69	; 105
+ 2e8:	30 e0       	ldi	r19, 0x00	; 0
+ 2ea:	3c 83       	std	Y+4, r19	; 0x04
+ 2ec:	2b 83       	std	Y+3, r18	; 0x03
+ 2ee:	9e 83       	std	Y+6, r25	; 0x06
+ 2f0:	8d 83       	std	Y+5, r24	; 0x05
+ 2f2:	35 e0       	ldi	r19, 0x05	; 5
+ 2f4:	3f 83       	std	Y+7, r19	; 0x07
+ 2f6:	ed 81       	ldd	r30, Y+5	; 0x05
+ 2f8:	fe 81       	ldd	r31, Y+6	; 0x06
+ 2fa:	00 80       	ld	r0, Z
+ 2fc:	2d 81       	ldd	r18, Y+5	; 0x05
+ 2fe:	3e 81       	ldd	r19, Y+6	; 0x06
+ 300:	2f 5f       	subi	r18, 0xFF	; 255
+ 302:	3f 4f       	sbci	r19, 0xFF	; 255
+ 304:	3e 83       	std	Y+6, r19	; 0x06
+ 306:	2d 83       	std	Y+5, r18	; 0x05
+ 308:	eb 81       	ldd	r30, Y+3	; 0x03
+ 30a:	fc 81       	ldd	r31, Y+4	; 0x04
+ 30c:	00 82       	st	Z, r0
+ 30e:	2b 81       	ldd	r18, Y+3	; 0x03
+ 310:	3c 81       	ldd	r19, Y+4	; 0x04
+ 312:	2f 5f       	subi	r18, 0xFF	; 255
+ 314:	3f 4f       	sbci	r19, 0xFF	; 255
+ 316:	3c 83       	std	Y+4, r19	; 0x04
+ 318:	2b 83       	std	Y+3, r18	; 0x03
+ 31a:	3f 81       	ldd	r19, Y+7	; 0x07
+ 31c:	31 50       	subi	r19, 0x01	; 1
+ 31e:	3f 83       	std	Y+7, r19	; 0x07
+ 320:	8f 81       	ldd	r24, Y+7	; 0x07
+ 322:	88 23       	and	r24, r24
+ 324:	41 f7       	brne	.-48     	; 0x2f6 <MCAL_TIM0_init+0x2c>
+
+	// Bit 7 – FOC0: Force Output Compare
+	// Bit 6, 3 – WGM01:0: Waveform Generation Mode
+	// Bit 5:4 – COM01:0: Compare Match Output Mode
+	// Bit 2:0 – CS02:0: Clock Select
+	TCCR0 = TIM0_config->mode | TIM0_config->clkSelect | (1 << FOC0);
+ 326:	a3 e5       	ldi	r26, 0x53	; 83
+ 328:	b0 e0       	ldi	r27, 0x00	; 0
+ 32a:	e9 81       	ldd	r30, Y+1	; 0x01
+ 32c:	fa 81       	ldd	r31, Y+2	; 0x02
+ 32e:	90 81       	ld	r25, Z
+ 330:	e9 81       	ldd	r30, Y+1	; 0x01
+ 332:	fa 81       	ldd	r31, Y+2	; 0x02
+ 334:	81 81       	ldd	r24, Z+1	; 0x01
+ 336:	89 2b       	or	r24, r25
+ 338:	80 68       	ori	r24, 0x80	; 128
+ 33a:	8c 93       	st	X, r24
+
+	if (TIM0_config->IRQ_enable == TIM0_IRQ_OVERFLOW) {
+ 33c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 33e:	fa 81       	ldd	r31, Y+2	; 0x02
+ 340:	82 81       	ldd	r24, Z+2	; 0x02
+ 342:	82 30       	cpi	r24, 0x02	; 2
+ 344:	41 f4       	brne	.+16     	; 0x356 <MCAL_TIM0_init+0x8c>
+		IRQ12_TIM0_OVF_ENABLE;
+ 346:	a9 e5       	ldi	r26, 0x59	; 89
+ 348:	b0 e0       	ldi	r27, 0x00	; 0
+ 34a:	e9 e5       	ldi	r30, 0x59	; 89
+ 34c:	f0 e0       	ldi	r31, 0x00	; 0
+ 34e:	80 81       	ld	r24, Z
+ 350:	81 60       	ori	r24, 0x01	; 1
+ 352:	8c 93       	st	X, r24
+ 354:	07 c0       	rjmp	.+14     	; 0x364 <MCAL_TIM0_init+0x9a>
+	} else {
+		IRQ11_TIM0_COMP_ENABLE;
+ 356:	a9 e5       	ldi	r26, 0x59	; 89
+ 358:	b0 e0       	ldi	r27, 0x00	; 0
+ 35a:	e9 e5       	ldi	r30, 0x59	; 89
+ 35c:	f0 e0       	ldi	r31, 0x00	; 0
+ 35e:	80 81       	ld	r24, Z
+ 360:	82 60       	ori	r24, 0x02	; 2
+ 362:	8c 93       	st	X, r24
+	}
+}
+ 364:	27 96       	adiw	r28, 0x07	; 7
+ 366:	0f b6       	in	r0, 0x3f	; 63
+ 368:	f8 94       	cli
+ 36a:	de bf       	out	0x3e, r29	; 62
+ 36c:	0f be       	out	0x3f, r0	; 63
+ 36e:	cd bf       	out	0x3d, r28	; 61
+ 370:	cf 91       	pop	r28
+ 372:	df 91       	pop	r29
+ 374:	08 95       	ret
+
+00000376 <MCAL_TIM0_deInit>:
+
+// @brief Reset TIM0.
+void MCAL_TIM0_deInit(void) {
+ 376:	df 93       	push	r29
+ 378:	cf 93       	push	r28
+ 37a:	cd b7       	in	r28, 0x3d	; 61
+ 37c:	de b7       	in	r29, 0x3e	; 62
+	IRQ12_TIM0_OVF_DISABLE;
+ 37e:	a9 e5       	ldi	r26, 0x59	; 89
+ 380:	b0 e0       	ldi	r27, 0x00	; 0
+ 382:	e9 e5       	ldi	r30, 0x59	; 89
+ 384:	f0 e0       	ldi	r31, 0x00	; 0
+ 386:	80 81       	ld	r24, Z
+ 388:	8e 7f       	andi	r24, 0xFE	; 254
+ 38a:	8c 93       	st	X, r24
+	IRQ11_TIM0_COMP_DISABLE;
+ 38c:	a9 e5       	ldi	r26, 0x59	; 89
+ 38e:	b0 e0       	ldi	r27, 0x00	; 0
+ 390:	e9 e5       	ldi	r30, 0x59	; 89
+ 392:	f0 e0       	ldi	r31, 0x00	; 0
+ 394:	80 81       	ld	r24, Z
+ 396:	8d 7f       	andi	r24, 0xFD	; 253
+ 398:	8c 93       	st	X, r24
+
+	TCCR0 = 0;
+ 39a:	e3 e5       	ldi	r30, 0x53	; 83
+ 39c:	f0 e0       	ldi	r31, 0x00	; 0
+ 39e:	10 82       	st	Z, r1
+	TCNT0 = 0;
+ 3a0:	e2 e5       	ldi	r30, 0x52	; 82
+ 3a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 3a4:	10 82       	st	Z, r1
+	OCR0 = 0;
+ 3a6:	ec e5       	ldi	r30, 0x5C	; 92
+ 3a8:	f0 e0       	ldi	r31, 0x00	; 0
+ 3aa:	10 82       	st	Z, r1
+	TIFR &= ~((1 << OCF0) | (1 << TOV0));
+ 3ac:	a8 e5       	ldi	r26, 0x58	; 88
+ 3ae:	b0 e0       	ldi	r27, 0x00	; 0
+ 3b0:	e8 e5       	ldi	r30, 0x58	; 88
+ 3b2:	f0 e0       	ldi	r31, 0x00	; 0
+ 3b4:	80 81       	ld	r24, Z
+ 3b6:	8c 7f       	andi	r24, 0xFC	; 252
+ 3b8:	8c 93       	st	X, r24
+}
+ 3ba:	cf 91       	pop	r28
+ 3bc:	df 91       	pop	r29
+ 3be:	08 95       	ret
+
+000003c0 <MCAL_TIM0_stop>:
+
+// @brief Stops TIM0.
+void MCAL_TIM0_stop() {
+ 3c0:	df 93       	push	r29
+ 3c2:	cf 93       	push	r28
+ 3c4:	cd b7       	in	r28, 0x3d	; 61
+ 3c6:	de b7       	in	r29, 0x3e	; 62
+	// No clock source to stop the timer
+	// the value below has 0b111 in Bit 2:0 – CS02:0: Clock Select
+	TCCR0 &= ~(TIM0_CLK_SELECT_EXT_RISING);
+ 3c8:	a3 e5       	ldi	r26, 0x53	; 83
+ 3ca:	b0 e0       	ldi	r27, 0x00	; 0
+ 3cc:	e3 e5       	ldi	r30, 0x53	; 83
+ 3ce:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d0:	80 81       	ld	r24, Z
+ 3d2:	88 7f       	andi	r24, 0xF8	; 248
+ 3d4:	8c 93       	st	X, r24
+}
+ 3d6:	cf 91       	pop	r28
+ 3d8:	df 91       	pop	r29
+ 3da:	08 95       	ret
+
+000003dc <MCAL_TIM0_getFlagStatus>:
+
+// @brief Return the status of a flag.
+// @return	   The value of flag status depending on mode.
+uint8 MCAL_TIM0_getFlagStatus(void) {
+ 3dc:	df 93       	push	r29
+ 3de:	cf 93       	push	r28
+ 3e0:	0f 92       	push	r0
+ 3e2:	cd b7       	in	r28, 0x3d	; 61
+ 3e4:	de b7       	in	r29, 0x3e	; 62
+	if (TIM0_g_config.mode == TIM0_MODE_NORMAL) {
+ 3e6:	80 91 69 00 	lds	r24, 0x0069
+ 3ea:	88 23       	and	r24, r24
+ 3ec:	39 f4       	brne	.+14     	; 0x3fc <MCAL_TIM0_getFlagStatus+0x20>
+		return GET_BIT(TIFR, TOV0);
+ 3ee:	e8 e5       	ldi	r30, 0x58	; 88
+ 3f0:	f0 e0       	ldi	r31, 0x00	; 0
+ 3f2:	80 81       	ld	r24, Z
+ 3f4:	98 2f       	mov	r25, r24
+ 3f6:	91 70       	andi	r25, 0x01	; 1
+ 3f8:	99 83       	std	Y+1, r25	; 0x01
+ 3fa:	0a c0       	rjmp	.+20     	; 0x410 <MCAL_TIM0_getFlagStatus+0x34>
+	} else {
+		return GET_BIT(TIFR, OCF0);
+ 3fc:	e8 e5       	ldi	r30, 0x58	; 88
+ 3fe:	f0 e0       	ldi	r31, 0x00	; 0
+ 400:	80 81       	ld	r24, Z
+ 402:	88 2f       	mov	r24, r24
+ 404:	90 e0       	ldi	r25, 0x00	; 0
+ 406:	82 70       	andi	r24, 0x02	; 2
+ 408:	90 70       	andi	r25, 0x00	; 0
+ 40a:	95 95       	asr	r25
+ 40c:	87 95       	ror	r24
+ 40e:	89 83       	std	Y+1, r24	; 0x01
+ 410:	89 81       	ldd	r24, Y+1	; 0x01
+	}
+}
+ 412:	0f 90       	pop	r0
+ 414:	cf 91       	pop	r28
+ 416:	df 91       	pop	r29
+ 418:	08 95       	ret
+
+0000041a <MCAL_TIM0_getCompareValue>:
+
+// @brief Return the compare value.
+// @return	   The value of OCR0 register.
+uint8 MCAL_TIM0_getCompareValue(void) {
+ 41a:	df 93       	push	r29
+ 41c:	cf 93       	push	r28
+ 41e:	cd b7       	in	r28, 0x3d	; 61
+ 420:	de b7       	in	r29, 0x3e	; 62
+	return OCR0;
+ 422:	ec e5       	ldi	r30, 0x5C	; 92
+ 424:	f0 e0       	ldi	r31, 0x00	; 0
+ 426:	80 81       	ld	r24, Z
+}
+ 428:	cf 91       	pop	r28
+ 42a:	df 91       	pop	r29
+ 42c:	08 95       	ret
+
+0000042e <MCAL_TIM0_setCompareValue>:
+
+// @brief Sets the compare value.
+// @param[in]  ticks 	The value of OCR0 register.
+void MCAL_TIM0_setCompareValue(uint8_t ticks) {
+ 42e:	df 93       	push	r29
+ 430:	cf 93       	push	r28
+ 432:	0f 92       	push	r0
+ 434:	cd b7       	in	r28, 0x3d	; 61
+ 436:	de b7       	in	r29, 0x3e	; 62
+ 438:	89 83       	std	Y+1, r24	; 0x01
+	OCR0 = ticks;
+ 43a:	ec e5       	ldi	r30, 0x5C	; 92
+ 43c:	f0 e0       	ldi	r31, 0x00	; 0
+ 43e:	89 81       	ldd	r24, Y+1	; 0x01
+ 440:	80 83       	st	Z, r24
+}
+ 442:	0f 90       	pop	r0
+ 444:	cf 91       	pop	r28
+ 446:	df 91       	pop	r29
+ 448:	08 95       	ret
+
+0000044a <MCAL_TIM0_getCounterValue>:
+
+// @brief Return the counter value.
+// @return	   The value of TCNT0 register.
+uint8 MCAL_TIM0_getCounterValue(void) {
+ 44a:	df 93       	push	r29
+ 44c:	cf 93       	push	r28
+ 44e:	cd b7       	in	r28, 0x3d	; 61
+ 450:	de b7       	in	r29, 0x3e	; 62
+	return TCNT0;
+ 452:	e2 e5       	ldi	r30, 0x52	; 82
+ 454:	f0 e0       	ldi	r31, 0x00	; 0
+ 456:	80 81       	ld	r24, Z
+}
+ 458:	cf 91       	pop	r28
+ 45a:	df 91       	pop	r29
+ 45c:	08 95       	ret
+
+0000045e <MCAL_TIM0_setCounterValue>:
+
+// @brief Sets the counter value.
+// @param[in]  ticks 	The value of TCNT0 register.
+void MCAL_TIM0_setCounterValue(uint8 ticks) {
+ 45e:	df 93       	push	r29
+ 460:	cf 93       	push	r28
+ 462:	0f 92       	push	r0
+ 464:	cd b7       	in	r28, 0x3d	; 61
+ 466:	de b7       	in	r29, 0x3e	; 62
+ 468:	89 83       	std	Y+1, r24	; 0x01
+	TCNT0 = ticks;
+ 46a:	e2 e5       	ldi	r30, 0x52	; 82
+ 46c:	f0 e0       	ldi	r31, 0x00	; 0
+ 46e:	89 81       	ldd	r24, Y+1	; 0x01
+ 470:	80 83       	st	Z, r24
+}
+ 472:	0f 90       	pop	r0
+ 474:	cf 91       	pop	r28
+ 476:	df 91       	pop	r29
+ 478:	08 95       	ret
+
+0000047a <MCAL_TIM0_getOverflowCounter>:
+
+// @brief Return the overflow counter value.
+// @return	   The value of OverflowCounter.
+uint8 MCAL_TIM0_getOverflowCounter(void) {
+ 47a:	df 93       	push	r29
+ 47c:	cf 93       	push	r28
+ 47e:	cd b7       	in	r28, 0x3d	; 61
+ 480:	de b7       	in	r29, 0x3e	; 62
+	return TIM0_g_overFlowCounter;
+ 482:	80 91 60 00 	lds	r24, 0x0060
+ 486:	90 91 61 00 	lds	r25, 0x0061
+ 48a:	a0 91 62 00 	lds	r26, 0x0062
+ 48e:	b0 91 63 00 	lds	r27, 0x0063
+}
+ 492:	cf 91       	pop	r28
+ 494:	df 91       	pop	r29
+ 496:	08 95       	ret
+
+00000498 <MCAL_TIM0_setOverflowCounter>:
+
+// @brief Sets the overflow counter value.
+// @param[in]  ticks 	The value of OverflowCounter.
+void MCAL_TIM0_setOverflowCounter(uint8 ticks) {
+ 498:	df 93       	push	r29
+ 49a:	cf 93       	push	r28
+ 49c:	0f 92       	push	r0
+ 49e:	cd b7       	in	r28, 0x3d	; 61
+ 4a0:	de b7       	in	r29, 0x3e	; 62
+ 4a2:	89 83       	std	Y+1, r24	; 0x01
+	TIM0_g_overFlowCounter = ticks;
+ 4a4:	89 81       	ldd	r24, Y+1	; 0x01
+ 4a6:	88 2f       	mov	r24, r24
+ 4a8:	90 e0       	ldi	r25, 0x00	; 0
+ 4aa:	a0 e0       	ldi	r26, 0x00	; 0
+ 4ac:	b0 e0       	ldi	r27, 0x00	; 0
+ 4ae:	80 93 60 00 	sts	0x0060, r24
+ 4b2:	90 93 61 00 	sts	0x0061, r25
+ 4b6:	a0 93 62 00 	sts	0x0062, r26
+ 4ba:	b0 93 63 00 	sts	0x0063, r27
+}
+ 4be:	0f 90       	pop	r0
+ 4c0:	cf 91       	pop	r28
+ 4c2:	df 91       	pop	r29
+ 4c4:	08 95       	ret
+
+000004c6 <__vector_10>:
+
+//*****************************************************************************
+// ISR Functions Definitions
+//*****************************************************************************
+ISR(TIMER0_COMP_vect) {
+ 4c6:	1f 92       	push	r1
+ 4c8:	0f 92       	push	r0
+ 4ca:	0f b6       	in	r0, 0x3f	; 63
+ 4cc:	0f 92       	push	r0
+ 4ce:	11 24       	eor	r1, r1
+ 4d0:	2f 93       	push	r18
+ 4d2:	3f 93       	push	r19
+ 4d4:	4f 93       	push	r20
+ 4d6:	5f 93       	push	r21
+ 4d8:	6f 93       	push	r22
+ 4da:	7f 93       	push	r23
+ 4dc:	8f 93       	push	r24
+ 4de:	9f 93       	push	r25
+ 4e0:	af 93       	push	r26
+ 4e2:	bf 93       	push	r27
+ 4e4:	ef 93       	push	r30
+ 4e6:	ff 93       	push	r31
+ 4e8:	df 93       	push	r29
+ 4ea:	cf 93       	push	r28
+ 4ec:	cd b7       	in	r28, 0x3d	; 61
+ 4ee:	de b7       	in	r29, 0x3e	; 62
+	TIM0_g_config.P_IRQ_callBack();
+ 4f0:	e0 91 6c 00 	lds	r30, 0x006C
+ 4f4:	f0 91 6d 00 	lds	r31, 0x006D
+ 4f8:	09 95       	icall
+}
+ 4fa:	cf 91       	pop	r28
+ 4fc:	df 91       	pop	r29
+ 4fe:	ff 91       	pop	r31
+ 500:	ef 91       	pop	r30
+ 502:	bf 91       	pop	r27
+ 504:	af 91       	pop	r26
+ 506:	9f 91       	pop	r25
+ 508:	8f 91       	pop	r24
+ 50a:	7f 91       	pop	r23
+ 50c:	6f 91       	pop	r22
+ 50e:	5f 91       	pop	r21
+ 510:	4f 91       	pop	r20
+ 512:	3f 91       	pop	r19
+ 514:	2f 91       	pop	r18
+ 516:	0f 90       	pop	r0
+ 518:	0f be       	out	0x3f, r0	; 63
+ 51a:	0f 90       	pop	r0
+ 51c:	1f 90       	pop	r1
+ 51e:	18 95       	reti
+
+00000520 <__vector_11>:
+
+ISR(TIMER0_OVF_vect) {
+ 520:	1f 92       	push	r1
+ 522:	0f 92       	push	r0
+ 524:	0f b6       	in	r0, 0x3f	; 63
+ 526:	0f 92       	push	r0
+ 528:	11 24       	eor	r1, r1
+ 52a:	2f 93       	push	r18
+ 52c:	3f 93       	push	r19
+ 52e:	4f 93       	push	r20
+ 530:	5f 93       	push	r21
+ 532:	6f 93       	push	r22
+ 534:	7f 93       	push	r23
+ 536:	8f 93       	push	r24
+ 538:	9f 93       	push	r25
+ 53a:	af 93       	push	r26
+ 53c:	bf 93       	push	r27
+ 53e:	ef 93       	push	r30
+ 540:	ff 93       	push	r31
+ 542:	df 93       	push	r29
+ 544:	cf 93       	push	r28
+ 546:	cd b7       	in	r28, 0x3d	; 61
+ 548:	de b7       	in	r29, 0x3e	; 62
+	TIM0_g_overFlowCounter++;
+ 54a:	80 91 60 00 	lds	r24, 0x0060
+ 54e:	90 91 61 00 	lds	r25, 0x0061
+ 552:	a0 91 62 00 	lds	r26, 0x0062
+ 556:	b0 91 63 00 	lds	r27, 0x0063
+ 55a:	01 96       	adiw	r24, 0x01	; 1
+ 55c:	a1 1d       	adc	r26, r1
+ 55e:	b1 1d       	adc	r27, r1
+ 560:	80 93 60 00 	sts	0x0060, r24
+ 564:	90 93 61 00 	sts	0x0061, r25
+ 568:	a0 93 62 00 	sts	0x0062, r26
+ 56c:	b0 93 63 00 	sts	0x0063, r27
+	TIM0_g_config.P_IRQ_callBack();
+ 570:	e0 91 6c 00 	lds	r30, 0x006C
+ 574:	f0 91 6d 00 	lds	r31, 0x006D
+ 578:	09 95       	icall
+}
+ 57a:	cf 91       	pop	r28
+ 57c:	df 91       	pop	r29
+ 57e:	ff 91       	pop	r31
+ 580:	ef 91       	pop	r30
+ 582:	bf 91       	pop	r27
+ 584:	af 91       	pop	r26
+ 586:	9f 91       	pop	r25
+ 588:	8f 91       	pop	r24
+ 58a:	7f 91       	pop	r23
+ 58c:	6f 91       	pop	r22
+ 58e:	5f 91       	pop	r21
+ 590:	4f 91       	pop	r20
+ 592:	3f 91       	pop	r19
+ 594:	2f 91       	pop	r18
+ 596:	0f 90       	pop	r0
+ 598:	0f be       	out	0x3f, r0	; 63
+ 59a:	0f 90       	pop	r0
+ 59c:	1f 90       	pop	r1
+ 59e:	18 95       	reti
+
+000005a0 <TIM0_callback>:
+#include "atmega32_gpio.h"
+
+uint32 CTC_counter = 0;
+uint8 counter = 0;
+
+void TIM0_callback() {
+ 5a0:	df 93       	push	r29
+ 5a2:	cf 93       	push	r28
+ 5a4:	cd b7       	in	r28, 0x3d	; 61
+ 5a6:	de b7       	in	r29, 0x3e	; 62
+	if (CTC_counter == 521) {
+ 5a8:	80 91 64 00 	lds	r24, 0x0064
+ 5ac:	90 91 65 00 	lds	r25, 0x0065
+ 5b0:	a0 91 66 00 	lds	r26, 0x0066
+ 5b4:	b0 91 67 00 	lds	r27, 0x0067
+ 5b8:	89 30       	cpi	r24, 0x09	; 9
+ 5ba:	22 e0       	ldi	r18, 0x02	; 2
+ 5bc:	92 07       	cpc	r25, r18
+ 5be:	20 e0       	ldi	r18, 0x00	; 0
+ 5c0:	a2 07       	cpc	r26, r18
+ 5c2:	20 e0       	ldi	r18, 0x00	; 0
+ 5c4:	b2 07       	cpc	r27, r18
+ 5c6:	a1 f4       	brne	.+40     	; 0x5f0 <TIM0_callback+0x50>
+		CTC_counter = 0;
+ 5c8:	10 92 64 00 	sts	0x0064, r1
+ 5cc:	10 92 65 00 	sts	0x0065, r1
+ 5d0:	10 92 66 00 	sts	0x0066, r1
+ 5d4:	10 92 67 00 	sts	0x0067, r1
+		MCAL_GPIO_writePort(GPIOA, ++counter);
+ 5d8:	80 91 68 00 	lds	r24, 0x0068
+ 5dc:	8f 5f       	subi	r24, 0xFF	; 255
+ 5de:	80 93 68 00 	sts	0x0068, r24
+ 5e2:	20 91 68 00 	lds	r18, 0x0068
+ 5e6:	89 e3       	ldi	r24, 0x39	; 57
+ 5e8:	90 e0       	ldi	r25, 0x00	; 0
+ 5ea:	62 2f       	mov	r22, r18
+ 5ec:	0e 94 3b 01 	call	0x276	; 0x276 <MCAL_GPIO_writePort>
+	}
+	CTC_counter++;
+ 5f0:	80 91 64 00 	lds	r24, 0x0064
+ 5f4:	90 91 65 00 	lds	r25, 0x0065
+ 5f8:	a0 91 66 00 	lds	r26, 0x0066
+ 5fc:	b0 91 67 00 	lds	r27, 0x0067
+ 600:	01 96       	adiw	r24, 0x01	; 1
+ 602:	a1 1d       	adc	r26, r1
+ 604:	b1 1d       	adc	r27, r1
+ 606:	80 93 64 00 	sts	0x0064, r24
+ 60a:	90 93 65 00 	sts	0x0065, r25
+ 60e:	a0 93 66 00 	sts	0x0066, r26
+ 612:	b0 93 67 00 	sts	0x0067, r27
+}
+ 616:	cf 91       	pop	r28
+ 618:	df 91       	pop	r29
+ 61a:	08 95       	ret
+
+0000061c <main>:
+
+int main(void) {
+ 61c:	df 93       	push	r29
+ 61e:	cf 93       	push	r28
+ 620:	cd b7       	in	r28, 0x3d	; 61
+ 622:	de b7       	in	r29, 0x3e	; 62
+ 624:	27 97       	sbiw	r28, 0x07	; 7
+ 626:	0f b6       	in	r0, 0x3f	; 63
+ 628:	f8 94       	cli
+ 62a:	de bf       	out	0x3e, r29	; 62
+ 62c:	0f be       	out	0x3f, r0	; 63
+ 62e:	cd bf       	out	0x3d, r28	; 61
+	GPIO_PinConfig segment = { GPIO_PIN_All, GPIO_MODE_OUT };
+ 630:	8f ef       	ldi	r24, 0xFF	; 255
+ 632:	89 83       	std	Y+1, r24	; 0x01
+ 634:	83 e0       	ldi	r24, 0x03	; 3
+ 636:	8a 83       	std	Y+2, r24	; 0x02
+	MCAL_GPIO_init(GPIOA, &segment);
+ 638:	89 e3       	ldi	r24, 0x39	; 57
+ 63a:	90 e0       	ldi	r25, 0x00	; 0
+ 63c:	9e 01       	movw	r18, r28
+ 63e:	2f 5f       	subi	r18, 0xFF	; 255
+ 640:	3f 4f       	sbci	r19, 0xFF	; 255
+ 642:	b9 01       	movw	r22, r18
+ 644:	0e 94 3e 00 	call	0x7c	; 0x7c <MCAL_GPIO_init>
+
+	TIM0_Config tim0;
+	tim0.clkSelect = TIM0_CLK_SELECT_8;
+ 648:	82 e0       	ldi	r24, 0x02	; 2
+ 64a:	8c 83       	std	Y+4, r24	; 0x04
+	tim0.mode = TIM0_MODE_CTC;
+ 64c:	88 e0       	ldi	r24, 0x08	; 8
+ 64e:	8b 83       	std	Y+3, r24	; 0x03
+	tim0.IRQ_enable = TIM0_IRQ_OUTPUT_COMPARE;
+ 650:	81 e0       	ldi	r24, 0x01	; 1
+ 652:	8d 83       	std	Y+5, r24	; 0x05
+	tim0.P_IRQ_callBack = TIM0_callback;
+ 654:	80 ed       	ldi	r24, 0xD0	; 208
+ 656:	92 e0       	ldi	r25, 0x02	; 2
+ 658:	9f 83       	std	Y+7, r25	; 0x07
+ 65a:	8e 83       	std	Y+6, r24	; 0x06
+
+	MCAL_TIM0_setCompareValue(240);
+ 65c:	80 ef       	ldi	r24, 0xF0	; 240
+ 65e:	0e 94 17 02 	call	0x42e	; 0x42e <MCAL_TIM0_setCompareValue>
+	MCAL_TIM0_init(&tim0);
+ 662:	ce 01       	movw	r24, r28
+ 664:	03 96       	adiw	r24, 0x03	; 3
+ 666:	0e 94 65 01 	call	0x2ca	; 0x2ca <MCAL_TIM0_init>
+
+	IRQ_GLOBAL_ENABLE;
+ 66a:	af e5       	ldi	r26, 0x5F	; 95
+ 66c:	b0 e0       	ldi	r27, 0x00	; 0
+ 66e:	ef e5       	ldi	r30, 0x5F	; 95
+ 670:	f0 e0       	ldi	r31, 0x00	; 0
+ 672:	80 81       	ld	r24, Z
+ 674:	80 68       	ori	r24, 0x80	; 128
+ 676:	8c 93       	st	X, r24
+ 678:	ff cf       	rjmp	.-2      	; 0x678 <main+0x5c>
+
+0000067a <_exit>:
+ 67a:	f8 94       	cli
+
+0000067c <__stop_program>:
+ 67c:	ff cf       	rjmp	.-2      	; 0x67c <__stop_program>
