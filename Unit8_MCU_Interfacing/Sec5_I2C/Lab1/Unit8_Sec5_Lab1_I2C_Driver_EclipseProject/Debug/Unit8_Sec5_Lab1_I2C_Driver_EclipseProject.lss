@@ -1,0 +1,1557 @@
+
+Unit8_Sec5_Lab1_I2C_Driver_EclipseProject.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000008a4  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000009  00800060  00800060  00000918  2**0
+                  ALLOC
+  2 .debug_aranges 000000e8  00000000  00000000  00000918  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 000001e6  00000000  00000000  00000a00  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   000007b6  00000000  00000000  00000be6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000002dd  00000000  00000000  0000139c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000009c0  00000000  00000000  00001679  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000170  00000000  00000000  0000203c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000039f  00000000  00000000  000021ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 000000d0  00000000  00000000  0000254b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 a5 03 	jmp	0x74a	; 0x74a <__vector_19>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a9 36       	cpi	r26, 0x69	; 105
+  6c:	b1 07       	cpc	r27, r17
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 18 04 	call	0x830	; 0x830 <main>
+  74:	0c 94 50 04 	jmp	0x8a0	; 0x8a0 <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <MCAL_GPIO_init>:
+// Functions Definitions
+//*****************************************************************************
+// @brief Setup the mode of the required pin/port.
+// @param[in]  GPIOx  The port to be configured.
+// @param[in]  pinConfig  The pin/port configuration.
+void MCAL_GPIO_init(GPIO_TypeDef *GPIOx, GPIO_PinConfig *pinConfig) {
+  7c:	df 93       	push	r29
+  7e:	cf 93       	push	r28
+  80:	cd b7       	in	r28, 0x3d	; 61
+  82:	de b7       	in	r29, 0x3e	; 62
+  84:	28 97       	sbiw	r28, 0x08	; 8
+  86:	0f b6       	in	r0, 0x3f	; 63
+  88:	f8 94       	cli
+  8a:	de bf       	out	0x3e, r29	; 62
+  8c:	0f be       	out	0x3f, r0	; 63
+  8e:	cd bf       	out	0x3d, r28	; 61
+  90:	9a 83       	std	Y+2, r25	; 0x02
+  92:	89 83       	std	Y+1, r24	; 0x01
+  94:	7c 83       	std	Y+4, r23	; 0x04
+  96:	6b 83       	std	Y+3, r22	; 0x03
+	if (pinConfig->GPIO_pinNumber == GPIO_PIN_All) {
+  98:	eb 81       	ldd	r30, Y+3	; 0x03
+  9a:	fc 81       	ldd	r31, Y+4	; 0x04
+  9c:	80 81       	ld	r24, Z
+  9e:	8f 3f       	cpi	r24, 0xFF	; 255
+  a0:	59 f5       	brne	.+86     	; 0xf8 <MCAL_GPIO_init+0x7c>
+		switch (pinConfig->GPIO_pinMode) {
+  a2:	eb 81       	ldd	r30, Y+3	; 0x03
+  a4:	fc 81       	ldd	r31, Y+4	; 0x04
+  a6:	81 81       	ldd	r24, Z+1	; 0x01
+  a8:	28 2f       	mov	r18, r24
+  aa:	30 e0       	ldi	r19, 0x00	; 0
+  ac:	38 87       	std	Y+8, r19	; 0x08
+  ae:	2f 83       	std	Y+7, r18	; 0x07
+  b0:	8f 81       	ldd	r24, Y+7	; 0x07
+  b2:	98 85       	ldd	r25, Y+8	; 0x08
+  b4:	82 30       	cpi	r24, 0x02	; 2
+  b6:	91 05       	cpc	r25, r1
+  b8:	99 f0       	breq	.+38     	; 0xe0 <MCAL_GPIO_init+0x64>
+  ba:	2f 81       	ldd	r18, Y+7	; 0x07
+  bc:	38 85       	ldd	r19, Y+8	; 0x08
+  be:	23 30       	cpi	r18, 0x03	; 3
+  c0:	31 05       	cpc	r19, r1
+  c2:	a9 f0       	breq	.+42     	; 0xee <MCAL_GPIO_init+0x72>
+  c4:	8f 81       	ldd	r24, Y+7	; 0x07
+  c6:	98 85       	ldd	r25, Y+8	; 0x08
+  c8:	81 30       	cpi	r24, 0x01	; 1
+  ca:	91 05       	cpc	r25, r1
+  cc:	09 f0       	breq	.+2      	; 0xd0 <MCAL_GPIO_init+0x54>
+  ce:	64 c0       	rjmp	.+200    	; 0x198 <MCAL_GPIO_init+0x11c>
+		case GPIO_MODE_IN_PULL_UP:
+			// DDR -> 0 Input
+			// PORT -> 1 Pull-up
+			GPIOx->DDR = (uint8) 0x00;
+  d0:	e9 81       	ldd	r30, Y+1	; 0x01
+  d2:	fa 81       	ldd	r31, Y+2	; 0x02
+  d4:	11 82       	std	Z+1, r1	; 0x01
+			GPIOx->PORT = (uint8) 0xFF;
+  d6:	e9 81       	ldd	r30, Y+1	; 0x01
+  d8:	fa 81       	ldd	r31, Y+2	; 0x02
+  da:	8f ef       	ldi	r24, 0xFF	; 255
+  dc:	82 83       	std	Z+2, r24	; 0x02
+  de:	5c c0       	rjmp	.+184    	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		case GPIO_MODE_IN_FLOATING:
+			// DDR -> 0 Input
+			// PORT -> 0 Pull-down
+			GPIOx->DDR = (uint8) 0x00;
+  e0:	e9 81       	ldd	r30, Y+1	; 0x01
+  e2:	fa 81       	ldd	r31, Y+2	; 0x02
+  e4:	11 82       	std	Z+1, r1	; 0x01
+			GPIOx->PORT = (uint8) 0x00;
+  e6:	e9 81       	ldd	r30, Y+1	; 0x01
+  e8:	fa 81       	ldd	r31, Y+2	; 0x02
+  ea:	12 82       	std	Z+2, r1	; 0x02
+  ec:	55 c0       	rjmp	.+170    	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		case GPIO_MODE_OUT:
+			// DDR -> 1 Output
+			GPIOx->DDR = (uint8) 0xFF;
+  ee:	e9 81       	ldd	r30, Y+1	; 0x01
+  f0:	fa 81       	ldd	r31, Y+2	; 0x02
+  f2:	8f ef       	ldi	r24, 0xFF	; 255
+  f4:	81 83       	std	Z+1, r24	; 0x01
+  f6:	50 c0       	rjmp	.+160    	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		default:
+			break;
+		}
+	} else {
+		switch (pinConfig->GPIO_pinMode) {
+  f8:	eb 81       	ldd	r30, Y+3	; 0x03
+  fa:	fc 81       	ldd	r31, Y+4	; 0x04
+  fc:	81 81       	ldd	r24, Z+1	; 0x01
+  fe:	28 2f       	mov	r18, r24
+ 100:	30 e0       	ldi	r19, 0x00	; 0
+ 102:	3e 83       	std	Y+6, r19	; 0x06
+ 104:	2d 83       	std	Y+5, r18	; 0x05
+ 106:	8d 81       	ldd	r24, Y+5	; 0x05
+ 108:	9e 81       	ldd	r25, Y+6	; 0x06
+ 10a:	82 30       	cpi	r24, 0x02	; 2
+ 10c:	91 05       	cpc	r25, r1
+ 10e:	09 f1       	breq	.+66     	; 0x152 <MCAL_GPIO_init+0xd6>
+ 110:	2d 81       	ldd	r18, Y+5	; 0x05
+ 112:	3e 81       	ldd	r19, Y+6	; 0x06
+ 114:	23 30       	cpi	r18, 0x03	; 3
+ 116:	31 05       	cpc	r19, r1
+ 118:	a9 f1       	breq	.+106    	; 0x184 <MCAL_GPIO_init+0x108>
+ 11a:	8d 81       	ldd	r24, Y+5	; 0x05
+ 11c:	9e 81       	ldd	r25, Y+6	; 0x06
+ 11e:	81 30       	cpi	r24, 0x01	; 1
+ 120:	91 05       	cpc	r25, r1
+ 122:	d1 f5       	brne	.+116    	; 0x198 <MCAL_GPIO_init+0x11c>
+		case GPIO_MODE_IN_PULL_UP:
+			// DDR -> 0 Input
+			// PORT -> 1 Pull-up
+			GPIOx->DDR &= ~pinConfig->GPIO_pinNumber;
+ 124:	e9 81       	ldd	r30, Y+1	; 0x01
+ 126:	fa 81       	ldd	r31, Y+2	; 0x02
+ 128:	81 81       	ldd	r24, Z+1	; 0x01
+ 12a:	98 2f       	mov	r25, r24
+ 12c:	eb 81       	ldd	r30, Y+3	; 0x03
+ 12e:	fc 81       	ldd	r31, Y+4	; 0x04
+ 130:	80 81       	ld	r24, Z
+ 132:	80 95       	com	r24
+ 134:	89 23       	and	r24, r25
+ 136:	e9 81       	ldd	r30, Y+1	; 0x01
+ 138:	fa 81       	ldd	r31, Y+2	; 0x02
+ 13a:	81 83       	std	Z+1, r24	; 0x01
+			GPIOx->PORT |= pinConfig->GPIO_pinNumber;
+ 13c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 13e:	fa 81       	ldd	r31, Y+2	; 0x02
+ 140:	92 81       	ldd	r25, Z+2	; 0x02
+ 142:	eb 81       	ldd	r30, Y+3	; 0x03
+ 144:	fc 81       	ldd	r31, Y+4	; 0x04
+ 146:	80 81       	ld	r24, Z
+ 148:	89 2b       	or	r24, r25
+ 14a:	e9 81       	ldd	r30, Y+1	; 0x01
+ 14c:	fa 81       	ldd	r31, Y+2	; 0x02
+ 14e:	82 83       	std	Z+2, r24	; 0x02
+ 150:	23 c0       	rjmp	.+70     	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		case GPIO_MODE_IN_FLOATING:
+			// DDR -> 0 Input
+			// PORT -> 0 Pull-down
+			GPIOx->DDR &= ~pinConfig->GPIO_pinNumber;
+ 152:	e9 81       	ldd	r30, Y+1	; 0x01
+ 154:	fa 81       	ldd	r31, Y+2	; 0x02
+ 156:	81 81       	ldd	r24, Z+1	; 0x01
+ 158:	98 2f       	mov	r25, r24
+ 15a:	eb 81       	ldd	r30, Y+3	; 0x03
+ 15c:	fc 81       	ldd	r31, Y+4	; 0x04
+ 15e:	80 81       	ld	r24, Z
+ 160:	80 95       	com	r24
+ 162:	89 23       	and	r24, r25
+ 164:	e9 81       	ldd	r30, Y+1	; 0x01
+ 166:	fa 81       	ldd	r31, Y+2	; 0x02
+ 168:	81 83       	std	Z+1, r24	; 0x01
+			GPIOx->PORT &= ~pinConfig->GPIO_pinNumber;
+ 16a:	e9 81       	ldd	r30, Y+1	; 0x01
+ 16c:	fa 81       	ldd	r31, Y+2	; 0x02
+ 16e:	82 81       	ldd	r24, Z+2	; 0x02
+ 170:	98 2f       	mov	r25, r24
+ 172:	eb 81       	ldd	r30, Y+3	; 0x03
+ 174:	fc 81       	ldd	r31, Y+4	; 0x04
+ 176:	80 81       	ld	r24, Z
+ 178:	80 95       	com	r24
+ 17a:	89 23       	and	r24, r25
+ 17c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 17e:	fa 81       	ldd	r31, Y+2	; 0x02
+ 180:	82 83       	std	Z+2, r24	; 0x02
+ 182:	0a c0       	rjmp	.+20     	; 0x198 <MCAL_GPIO_init+0x11c>
+			break;
+		case GPIO_MODE_OUT:
+			// DDR -> 1 Output
+			GPIOx->DDR |= pinConfig->GPIO_pinNumber;
+ 184:	e9 81       	ldd	r30, Y+1	; 0x01
+ 186:	fa 81       	ldd	r31, Y+2	; 0x02
+ 188:	91 81       	ldd	r25, Z+1	; 0x01
+ 18a:	eb 81       	ldd	r30, Y+3	; 0x03
+ 18c:	fc 81       	ldd	r31, Y+4	; 0x04
+ 18e:	80 81       	ld	r24, Z
+ 190:	89 2b       	or	r24, r25
+ 192:	e9 81       	ldd	r30, Y+1	; 0x01
+ 194:	fa 81       	ldd	r31, Y+2	; 0x02
+ 196:	81 83       	std	Z+1, r24	; 0x01
+			break;
+		default:
+			break;
+		}
+	}
+}
+ 198:	28 96       	adiw	r28, 0x08	; 8
+ 19a:	0f b6       	in	r0, 0x3f	; 63
+ 19c:	f8 94       	cli
+ 19e:	de bf       	out	0x3e, r29	; 62
+ 1a0:	0f be       	out	0x3f, r0	; 63
+ 1a2:	cd bf       	out	0x3d, r28	; 61
+ 1a4:	cf 91       	pop	r28
+ 1a6:	df 91       	pop	r29
+ 1a8:	08 95       	ret
+
+000001aa <MCAL_GPIO_deInit>:
+
+// @brief Reset the port configuration.
+// @param[in]  GPIOx  The port to be reset.
+void MCAL_GPIO_deInit(GPIO_TypeDef *GPIOx) {
+ 1aa:	df 93       	push	r29
+ 1ac:	cf 93       	push	r28
+ 1ae:	00 d0       	rcall	.+0      	; 0x1b0 <MCAL_GPIO_deInit+0x6>
+ 1b0:	cd b7       	in	r28, 0x3d	; 61
+ 1b2:	de b7       	in	r29, 0x3e	; 62
+ 1b4:	9a 83       	std	Y+2, r25	; 0x02
+ 1b6:	89 83       	std	Y+1, r24	; 0x01
+	// Reset values
+	GPIOx->DDR = (uint8) 0xFF;
+ 1b8:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1ba:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1bc:	8f ef       	ldi	r24, 0xFF	; 255
+ 1be:	81 83       	std	Z+1, r24	; 0x01
+	GPIOx->PORT = (uint8) 0xFF;
+ 1c0:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1c2:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1c4:	8f ef       	ldi	r24, 0xFF	; 255
+ 1c6:	82 83       	std	Z+2, r24	; 0x02
+}
+ 1c8:	0f 90       	pop	r0
+ 1ca:	0f 90       	pop	r0
+ 1cc:	cf 91       	pop	r28
+ 1ce:	df 91       	pop	r29
+ 1d0:	08 95       	ret
+
+000001d2 <MCAL_GPIO_readPin>:
+
+// @brief Read the pin value.
+// @param[in]  GPIOx  The port to be used.
+// @param[in]  pinNumber  The pin number.
+// @return The pin value.
+uint8 MCAL_GPIO_readPin(GPIO_TypeDef *GPIOx, uint8 pinNumber) {
+ 1d2:	df 93       	push	r29
+ 1d4:	cf 93       	push	r28
+ 1d6:	00 d0       	rcall	.+0      	; 0x1d8 <MCAL_GPIO_readPin+0x6>
+ 1d8:	00 d0       	rcall	.+0      	; 0x1da <MCAL_GPIO_readPin+0x8>
+ 1da:	cd b7       	in	r28, 0x3d	; 61
+ 1dc:	de b7       	in	r29, 0x3e	; 62
+ 1de:	9a 83       	std	Y+2, r25	; 0x02
+ 1e0:	89 83       	std	Y+1, r24	; 0x01
+ 1e2:	6b 83       	std	Y+3, r22	; 0x03
+	if ((GPIOx->PIN & pinNumber) == LOGIC_LOW) {
+ 1e4:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1e6:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1e8:	90 81       	ld	r25, Z
+ 1ea:	8b 81       	ldd	r24, Y+3	; 0x03
+ 1ec:	89 23       	and	r24, r25
+ 1ee:	88 23       	and	r24, r24
+ 1f0:	11 f4       	brne	.+4      	; 0x1f6 <MCAL_GPIO_readPin+0x24>
+		return LOGIC_LOW;
+ 1f2:	1c 82       	std	Y+4, r1	; 0x04
+ 1f4:	02 c0       	rjmp	.+4      	; 0x1fa <MCAL_GPIO_readPin+0x28>
+	} else {
+		return LOGIC_HIGH;
+ 1f6:	81 e0       	ldi	r24, 0x01	; 1
+ 1f8:	8c 83       	std	Y+4, r24	; 0x04
+ 1fa:	8c 81       	ldd	r24, Y+4	; 0x04
+	}
+	return LOGIC_LOW;
+}
+ 1fc:	0f 90       	pop	r0
+ 1fe:	0f 90       	pop	r0
+ 200:	0f 90       	pop	r0
+ 202:	0f 90       	pop	r0
+ 204:	cf 91       	pop	r28
+ 206:	df 91       	pop	r29
+ 208:	08 95       	ret
+
+0000020a <MCAL_GPIO_readPort>:
+
+// @brief Read the port value.
+// @param[in]  GPIOx  The port to be read.
+// @return The port value.
+uint8 MCAL_GPIO_readPort(GPIO_TypeDef *GPIOx) {
+ 20a:	df 93       	push	r29
+ 20c:	cf 93       	push	r28
+ 20e:	00 d0       	rcall	.+0      	; 0x210 <MCAL_GPIO_readPort+0x6>
+ 210:	cd b7       	in	r28, 0x3d	; 61
+ 212:	de b7       	in	r29, 0x3e	; 62
+ 214:	9a 83       	std	Y+2, r25	; 0x02
+ 216:	89 83       	std	Y+1, r24	; 0x01
+	return (uint8) (GPIOx->PIN & 0xFF);
+ 218:	e9 81       	ldd	r30, Y+1	; 0x01
+ 21a:	fa 81       	ldd	r31, Y+2	; 0x02
+ 21c:	80 81       	ld	r24, Z
+}
+ 21e:	0f 90       	pop	r0
+ 220:	0f 90       	pop	r0
+ 222:	cf 91       	pop	r28
+ 224:	df 91       	pop	r29
+ 226:	08 95       	ret
+
+00000228 <MCAL_GPIO_writePin>:
+
+// @brief Set a pin to a value.
+// @param[in]  GPIOx  The port to be used.
+// @param[in]  pinNumber  The pin number.
+// @param[in]  value  The value to be set.
+void MCAL_GPIO_writePin(GPIO_TypeDef *GPIOx, uint8 pinNumber, uint8 value) {
+ 228:	df 93       	push	r29
+ 22a:	cf 93       	push	r28
+ 22c:	00 d0       	rcall	.+0      	; 0x22e <MCAL_GPIO_writePin+0x6>
+ 22e:	00 d0       	rcall	.+0      	; 0x230 <MCAL_GPIO_writePin+0x8>
+ 230:	cd b7       	in	r28, 0x3d	; 61
+ 232:	de b7       	in	r29, 0x3e	; 62
+ 234:	9a 83       	std	Y+2, r25	; 0x02
+ 236:	89 83       	std	Y+1, r24	; 0x01
+ 238:	6b 83       	std	Y+3, r22	; 0x03
+ 23a:	4c 83       	std	Y+4, r20	; 0x04
+	if (value == LOGIC_LOW) {
+ 23c:	8c 81       	ldd	r24, Y+4	; 0x04
+ 23e:	88 23       	and	r24, r24
+ 240:	59 f4       	brne	.+22     	; 0x258 <MCAL_GPIO_writePin+0x30>
+		GPIOx->PORT &= ~pinNumber;
+ 242:	e9 81       	ldd	r30, Y+1	; 0x01
+ 244:	fa 81       	ldd	r31, Y+2	; 0x02
+ 246:	82 81       	ldd	r24, Z+2	; 0x02
+ 248:	98 2f       	mov	r25, r24
+ 24a:	8b 81       	ldd	r24, Y+3	; 0x03
+ 24c:	80 95       	com	r24
+ 24e:	89 23       	and	r24, r25
+ 250:	e9 81       	ldd	r30, Y+1	; 0x01
+ 252:	fa 81       	ldd	r31, Y+2	; 0x02
+ 254:	82 83       	std	Z+2, r24	; 0x02
+ 256:	08 c0       	rjmp	.+16     	; 0x268 <MCAL_GPIO_writePin+0x40>
+	} else {
+		GPIOx->PORT |= pinNumber;
+ 258:	e9 81       	ldd	r30, Y+1	; 0x01
+ 25a:	fa 81       	ldd	r31, Y+2	; 0x02
+ 25c:	92 81       	ldd	r25, Z+2	; 0x02
+ 25e:	8b 81       	ldd	r24, Y+3	; 0x03
+ 260:	89 2b       	or	r24, r25
+ 262:	e9 81       	ldd	r30, Y+1	; 0x01
+ 264:	fa 81       	ldd	r31, Y+2	; 0x02
+ 266:	82 83       	std	Z+2, r24	; 0x02
+	}
+}
+ 268:	0f 90       	pop	r0
+ 26a:	0f 90       	pop	r0
+ 26c:	0f 90       	pop	r0
+ 26e:	0f 90       	pop	r0
+ 270:	cf 91       	pop	r28
+ 272:	df 91       	pop	r29
+ 274:	08 95       	ret
+
+00000276 <MCAL_GPIO_writePort>:
+
+// @brief Set a port to a value.
+// @param[in]  GPIOx  The port to be set.
+// @param[in]  value  The value to be set.
+void MCAL_GPIO_writePort(GPIO_TypeDef *GPIOx, uint8 value) {
+ 276:	df 93       	push	r29
+ 278:	cf 93       	push	r28
+ 27a:	00 d0       	rcall	.+0      	; 0x27c <MCAL_GPIO_writePort+0x6>
+ 27c:	0f 92       	push	r0
+ 27e:	cd b7       	in	r28, 0x3d	; 61
+ 280:	de b7       	in	r29, 0x3e	; 62
+ 282:	9a 83       	std	Y+2, r25	; 0x02
+ 284:	89 83       	std	Y+1, r24	; 0x01
+ 286:	6b 83       	std	Y+3, r22	; 0x03
+	GPIOx->PORT = (uint8) value;
+ 288:	e9 81       	ldd	r30, Y+1	; 0x01
+ 28a:	fa 81       	ldd	r31, Y+2	; 0x02
+ 28c:	8b 81       	ldd	r24, Y+3	; 0x03
+ 28e:	82 83       	std	Z+2, r24	; 0x02
+}
+ 290:	0f 90       	pop	r0
+ 292:	0f 90       	pop	r0
+ 294:	0f 90       	pop	r0
+ 296:	cf 91       	pop	r28
+ 298:	df 91       	pop	r29
+ 29a:	08 95       	ret
+
+0000029c <MCAL_GPIO_togglePin>:
+
+// @brief Toggle a pin.
+// @param[in]  GPIOx  The port to be used.
+// @param[in]  pinNumber  The pin number.
+void MCAL_GPIO_togglePin(GPIO_TypeDef *GPIOx, uint8 pinNumber) {
+ 29c:	df 93       	push	r29
+ 29e:	cf 93       	push	r28
+ 2a0:	00 d0       	rcall	.+0      	; 0x2a2 <MCAL_GPIO_togglePin+0x6>
+ 2a2:	0f 92       	push	r0
+ 2a4:	cd b7       	in	r28, 0x3d	; 61
+ 2a6:	de b7       	in	r29, 0x3e	; 62
+ 2a8:	9a 83       	std	Y+2, r25	; 0x02
+ 2aa:	89 83       	std	Y+1, r24	; 0x01
+ 2ac:	6b 83       	std	Y+3, r22	; 0x03
+	GPIOx->PORT ^= pinNumber;
+ 2ae:	e9 81       	ldd	r30, Y+1	; 0x01
+ 2b0:	fa 81       	ldd	r31, Y+2	; 0x02
+ 2b2:	92 81       	ldd	r25, Z+2	; 0x02
+ 2b4:	8b 81       	ldd	r24, Y+3	; 0x03
+ 2b6:	89 27       	eor	r24, r25
+ 2b8:	e9 81       	ldd	r30, Y+1	; 0x01
+ 2ba:	fa 81       	ldd	r31, Y+2	; 0x02
+ 2bc:	82 83       	std	Z+2, r24	; 0x02
+}
+ 2be:	0f 90       	pop	r0
+ 2c0:	0f 90       	pop	r0
+ 2c2:	0f 90       	pop	r0
+ 2c4:	cf 91       	pop	r28
+ 2c6:	df 91       	pop	r29
+ 2c8:	08 95       	ret
+
+000002ca <MCAL_I2C_init>:
+//*****************************************************************************
+// Functions Definitions
+//*****************************************************************************
+// @brief Initialize the I2C device
+// @param[in]  I2C_config  	The needed configuration.
+void MCAL_I2C_init(I2C_Config *I2C_config) {
+ 2ca:	df 93       	push	r29
+ 2cc:	cf 93       	push	r28
+ 2ce:	cd b7       	in	r28, 0x3d	; 61
+ 2d0:	de b7       	in	r29, 0x3e	; 62
+ 2d2:	27 97       	sbiw	r28, 0x07	; 7
+ 2d4:	0f b6       	in	r0, 0x3f	; 63
+ 2d6:	f8 94       	cli
+ 2d8:	de bf       	out	0x3e, r29	; 62
+ 2da:	0f be       	out	0x3f, r0	; 63
+ 2dc:	cd bf       	out	0x3d, r28	; 61
+ 2de:	9a 83       	std	Y+2, r25	; 0x02
+ 2e0:	89 83       	std	Y+1, r24	; 0x01
+	I2C_g_config = *I2C_config;
+ 2e2:	89 81       	ldd	r24, Y+1	; 0x01
+ 2e4:	9a 81       	ldd	r25, Y+2	; 0x02
+ 2e6:	21 e6       	ldi	r18, 0x61	; 97
+ 2e8:	30 e0       	ldi	r19, 0x00	; 0
+ 2ea:	3c 83       	std	Y+4, r19	; 0x04
+ 2ec:	2b 83       	std	Y+3, r18	; 0x03
+ 2ee:	9e 83       	std	Y+6, r25	; 0x06
+ 2f0:	8d 83       	std	Y+5, r24	; 0x05
+ 2f2:	38 e0       	ldi	r19, 0x08	; 8
+ 2f4:	3f 83       	std	Y+7, r19	; 0x07
+ 2f6:	ed 81       	ldd	r30, Y+5	; 0x05
+ 2f8:	fe 81       	ldd	r31, Y+6	; 0x06
+ 2fa:	00 80       	ld	r0, Z
+ 2fc:	2d 81       	ldd	r18, Y+5	; 0x05
+ 2fe:	3e 81       	ldd	r19, Y+6	; 0x06
+ 300:	2f 5f       	subi	r18, 0xFF	; 255
+ 302:	3f 4f       	sbci	r19, 0xFF	; 255
+ 304:	3e 83       	std	Y+6, r19	; 0x06
+ 306:	2d 83       	std	Y+5, r18	; 0x05
+ 308:	eb 81       	ldd	r30, Y+3	; 0x03
+ 30a:	fc 81       	ldd	r31, Y+4	; 0x04
+ 30c:	00 82       	st	Z, r0
+ 30e:	2b 81       	ldd	r18, Y+3	; 0x03
+ 310:	3c 81       	ldd	r19, Y+4	; 0x04
+ 312:	2f 5f       	subi	r18, 0xFF	; 255
+ 314:	3f 4f       	sbci	r19, 0xFF	; 255
+ 316:	3c 83       	std	Y+4, r19	; 0x04
+ 318:	2b 83       	std	Y+3, r18	; 0x03
+ 31a:	3f 81       	ldd	r19, Y+7	; 0x07
+ 31c:	31 50       	subi	r19, 0x01	; 1
+ 31e:	3f 83       	std	Y+7, r19	; 0x07
+ 320:	8f 81       	ldd	r24, Y+7	; 0x07
+ 322:	88 23       	and	r24, r24
+ 324:	41 f7       	brne	.-48     	; 0x2f6 <MCAL_I2C_init+0x2c>
+
+	// Other frequencies not supported yet
+	if (I2C_config->clkSpeed == I2C_CLK_SPEED_400KHZ) {
+ 326:	e9 81       	ldd	r30, Y+1	; 0x01
+ 328:	fa 81       	ldd	r31, Y+2	; 0x02
+ 32a:	82 81       	ldd	r24, Z+2	; 0x02
+ 32c:	82 30       	cpi	r24, 0x02	; 2
+ 32e:	39 f4       	brne	.+14     	; 0x33e <MCAL_I2C_init+0x74>
+		// SCL frequency = CPU Clock frequency / 16 + 2(TWBR)*4^TWPS
+		// Let TWPS = 0
+		// 400000 = 8000000 / (16 + 2 * TWBR * 1)
+		// TWBR = 2
+		// Bits 7..0 I2C Bit Rate Register
+		TWBR = 0x02;
+ 330:	e0 e2       	ldi	r30, 0x20	; 32
+ 332:	f0 e0       	ldi	r31, 0x00	; 0
+ 334:	82 e0       	ldi	r24, 0x02	; 2
+ 336:	80 83       	st	Z, r24
+
+		// Bits 1..0 TWPS: I2C Prescaler Bits
+		TWSR = 0x00;
+ 338:	e1 e2       	ldi	r30, 0x21	; 33
+ 33a:	f0 e0       	ldi	r31, 0x00	; 0
+ 33c:	10 82       	st	Z, r1
+	}
+	// TWAR
+	// Bits 7..1 TWA: I2C (Slave) Address Register
+	if (I2C_config->deviceMode == I2C_DEVICE_MODE_SLAVE) {
+ 33e:	e9 81       	ldd	r30, Y+1	; 0x01
+ 340:	fa 81       	ldd	r31, Y+2	; 0x02
+ 342:	80 81       	ld	r24, Z
+ 344:	81 30       	cpi	r24, 0x01	; 1
+ 346:	39 f4       	brne	.+14     	; 0x356 <MCAL_I2C_init+0x8c>
+		TWAR = (I2C_config->slaveAddress << 1);
+ 348:	a2 e2       	ldi	r26, 0x22	; 34
+ 34a:	b0 e0       	ldi	r27, 0x00	; 0
+ 34c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 34e:	fa 81       	ldd	r31, Y+2	; 0x02
+ 350:	81 81       	ldd	r24, Z+1	; 0x01
+ 352:	88 0f       	add	r24, r24
+ 354:	8c 93       	st	X, r24
+	}
+	// TWAR
+	// Bit 0 TWGCE: I2C General Call Recognition Enable Bit
+	if (I2C_config->generalCallAddressDetection) {
+ 356:	e9 81       	ldd	r30, Y+1	; 0x01
+ 358:	fa 81       	ldd	r31, Y+2	; 0x02
+ 35a:	84 81       	ldd	r24, Z+4	; 0x04
+ 35c:	88 23       	and	r24, r24
+ 35e:	39 f0       	breq	.+14     	; 0x36e <MCAL_I2C_init+0xa4>
+		TWAR |= I2C_GCAD_ENABLE;
+ 360:	a2 e2       	ldi	r26, 0x22	; 34
+ 362:	b0 e0       	ldi	r27, 0x00	; 0
+ 364:	e2 e2       	ldi	r30, 0x22	; 34
+ 366:	f0 e0       	ldi	r31, 0x00	; 0
+ 368:	80 81       	ld	r24, Z
+ 36a:	81 60       	ori	r24, 0x01	; 1
+ 36c:	8c 93       	st	X, r24
+	}
+
+	if (I2C_config->IRQ_enable) {
+ 36e:	e9 81       	ldd	r30, Y+1	; 0x01
+ 370:	fa 81       	ldd	r31, Y+2	; 0x02
+ 372:	85 81       	ldd	r24, Z+5	; 0x05
+ 374:	88 23       	and	r24, r24
+ 376:	39 f0       	breq	.+14     	; 0x386 <MCAL_I2C_init+0xbc>
+		IRQ20_I2C_ENABLE;
+ 378:	a6 e5       	ldi	r26, 0x56	; 86
+ 37a:	b0 e0       	ldi	r27, 0x00	; 0
+ 37c:	e6 e5       	ldi	r30, 0x56	; 86
+ 37e:	f0 e0       	ldi	r31, 0x00	; 0
+ 380:	80 81       	ld	r24, Z
+ 382:	81 60       	ori	r24, 0x01	; 1
+ 384:	8c 93       	st	X, r24
+	}
+
+	// Bit 2 TWEN: I2C Enable Bit
+	if (I2C_g_config.ACK_control == I2C_ACK_CONTROL_ENABLE) {
+ 386:	80 91 64 00 	lds	r24, 0x0064
+ 38a:	80 34       	cpi	r24, 0x40	; 64
+ 38c:	41 f4       	brne	.+16     	; 0x39e <MCAL_I2C_init+0xd4>
+		TWCR |= (1 << TWINT) | (1 << TWEN) | (1 << TWEA);
+ 38e:	a6 e5       	ldi	r26, 0x56	; 86
+ 390:	b0 e0       	ldi	r27, 0x00	; 0
+ 392:	e6 e5       	ldi	r30, 0x56	; 86
+ 394:	f0 e0       	ldi	r31, 0x00	; 0
+ 396:	80 81       	ld	r24, Z
+ 398:	84 6c       	ori	r24, 0xC4	; 196
+ 39a:	8c 93       	st	X, r24
+ 39c:	07 c0       	rjmp	.+14     	; 0x3ac <MCAL_I2C_init+0xe2>
+	} else {
+		TWCR |= (1 << TWINT) | (1 << TWEN);
+ 39e:	a6 e5       	ldi	r26, 0x56	; 86
+ 3a0:	b0 e0       	ldi	r27, 0x00	; 0
+ 3a2:	e6 e5       	ldi	r30, 0x56	; 86
+ 3a4:	f0 e0       	ldi	r31, 0x00	; 0
+ 3a6:	80 81       	ld	r24, Z
+ 3a8:	84 68       	ori	r24, 0x84	; 132
+ 3aa:	8c 93       	st	X, r24
+	}
+}
+ 3ac:	27 96       	adiw	r28, 0x07	; 7
+ 3ae:	0f b6       	in	r0, 0x3f	; 63
+ 3b0:	f8 94       	cli
+ 3b2:	de bf       	out	0x3e, r29	; 62
+ 3b4:	0f be       	out	0x3f, r0	; 63
+ 3b6:	cd bf       	out	0x3d, r28	; 61
+ 3b8:	cf 91       	pop	r28
+ 3ba:	df 91       	pop	r29
+ 3bc:	08 95       	ret
+
+000003be <MCAL_I2C_deInit>:
+
+// @brief Reset the I2C.
+void MCAL_I2C_deInit(void) {
+ 3be:	df 93       	push	r29
+ 3c0:	cf 93       	push	r28
+ 3c2:	cd b7       	in	r28, 0x3d	; 61
+ 3c4:	de b7       	in	r29, 0x3e	; 62
+	TWCR = 0;
+ 3c6:	e6 e5       	ldi	r30, 0x56	; 86
+ 3c8:	f0 e0       	ldi	r31, 0x00	; 0
+ 3ca:	10 82       	st	Z, r1
+	TWBR = 0;
+ 3cc:	e0 e2       	ldi	r30, 0x20	; 32
+ 3ce:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d0:	10 82       	st	Z, r1
+	TWSR = 0;
+ 3d2:	e1 e2       	ldi	r30, 0x21	; 33
+ 3d4:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d6:	10 82       	st	Z, r1
+	TWDR = 0xFF;
+ 3d8:	e3 e2       	ldi	r30, 0x23	; 35
+ 3da:	f0 e0       	ldi	r31, 0x00	; 0
+ 3dc:	8f ef       	ldi	r24, 0xFF	; 255
+ 3de:	80 83       	st	Z, r24
+	TWAR = 0xFF;
+ 3e0:	e2 e2       	ldi	r30, 0x22	; 34
+ 3e2:	f0 e0       	ldi	r31, 0x00	; 0
+ 3e4:	8f ef       	ldi	r24, 0xFF	; 255
+ 3e6:	80 83       	st	Z, r24
+	IRQ20_I2C_DISABLE;
+ 3e8:	a6 e5       	ldi	r26, 0x56	; 86
+ 3ea:	b0 e0       	ldi	r27, 0x00	; 0
+ 3ec:	e6 e5       	ldi	r30, 0x56	; 86
+ 3ee:	f0 e0       	ldi	r31, 0x00	; 0
+ 3f0:	80 81       	ld	r24, Z
+ 3f2:	8e 7f       	andi	r24, 0xFE	; 254
+ 3f4:	8c 93       	st	X, r24
+}
+ 3f6:	cf 91       	pop	r28
+ 3f8:	df 91       	pop	r29
+ 3fa:	08 95       	ret
+
+000003fc <MCAL_I2C_masterTx>:
+// @param[in]  dataTx  			The data to be sent.
+// @param[in]  stopCondition 	Send with or without a stop bit.
+// @param[in]  startCondition 	Send a repeated start or not.
+// @return	   Return 0 if error occurred
+uint8 MCAL_I2C_masterTx(uint16 slaveAddress, uint8 *dataTx, uint32 dataLength,
+		uint8 stopCondition, uint8 startCondition) {
+ 3fc:	ef 92       	push	r14
+ 3fe:	0f 93       	push	r16
+ 400:	df 93       	push	r29
+ 402:	cf 93       	push	r28
+ 404:	cd b7       	in	r28, 0x3d	; 61
+ 406:	de b7       	in	r29, 0x3e	; 62
+ 408:	2f 97       	sbiw	r28, 0x0f	; 15
+ 40a:	0f b6       	in	r0, 0x3f	; 63
+ 40c:	f8 94       	cli
+ 40e:	de bf       	out	0x3e, r29	; 62
+ 410:	0f be       	out	0x3f, r0	; 63
+ 412:	cd bf       	out	0x3d, r28	; 61
+ 414:	9e 83       	std	Y+6, r25	; 0x06
+ 416:	8d 83       	std	Y+5, r24	; 0x05
+ 418:	78 87       	std	Y+8, r23	; 0x08
+ 41a:	6f 83       	std	Y+7, r22	; 0x07
+ 41c:	29 87       	std	Y+9, r18	; 0x09
+ 41e:	3a 87       	std	Y+10, r19	; 0x0a
+ 420:	4b 87       	std	Y+11, r20	; 0x0b
+ 422:	5c 87       	std	Y+12, r21	; 0x0c
+ 424:	0d 87       	std	Y+13, r16	; 0x0d
+ 426:	ee 86       	std	Y+14, r14	; 0x0e
+	uint32 i = 0;
+ 428:	19 82       	std	Y+1, r1	; 0x01
+ 42a:	1a 82       	std	Y+2, r1	; 0x02
+ 42c:	1b 82       	std	Y+3, r1	; 0x03
+ 42e:	1c 82       	std	Y+4, r1	; 0x04
+
+	// 1. Application writes to TWCR to initiate transmission of START
+	// 2. I2CNT set. Status code indicates START condition sent
+	I2C_generateStart();
+ 430:	0e 94 63 03 	call	0x6c6	; 0x6c6 <I2C_generateStart>
+
+	// 3. Check TWSR to see if START was sent.
+	if (startCondition == I2C_START_NORMAL) {
+ 434:	8e 85       	ldd	r24, Y+14	; 0x0e
+ 436:	88 23       	and	r24, r24
+ 438:	39 f4       	brne	.+14     	; 0x448 <MCAL_I2C_masterTx+0x4c>
+		if (!I2C_getFlagStatus(I2C_FLAG_MT_START))
+ 43a:	88 e0       	ldi	r24, 0x08	; 8
+ 43c:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 440:	88 23       	and	r24, r24
+ 442:	49 f4       	brne	.+18     	; 0x456 <MCAL_I2C_masterTx+0x5a>
+			return FALSE;
+ 444:	1f 86       	std	Y+15, r1	; 0x0f
+ 446:	52 c0       	rjmp	.+164    	; 0x4ec <MCAL_I2C_masterTx+0xf0>
+	} else {
+		if (!I2C_getFlagStatus(I2C_FLAG_MT_REP_START))
+ 448:	80 e1       	ldi	r24, 0x10	; 16
+ 44a:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 44e:	88 23       	and	r24, r24
+ 450:	11 f4       	brne	.+4      	; 0x456 <MCAL_I2C_masterTx+0x5a>
+			return FALSE;
+ 452:	1f 86       	std	Y+15, r1	; 0x0f
+ 454:	4b c0       	rjmp	.+150    	; 0x4ec <MCAL_I2C_masterTx+0xf0>
+	}
+
+	// Application loads SLA+W into TWDR, and loads appropriate control signals into TWCR,
+	// making sure that I2CNT is written to one, and TWSTA is written to zero
+	I2C_sendAddress(slaveAddress, I2C_DIRECTION_TRANSMITTER);
+ 456:	8d 81       	ldd	r24, Y+5	; 0x05
+ 458:	9e 81       	ldd	r25, Y+6	; 0x06
+ 45a:	60 e0       	ldi	r22, 0x00	; 0
+ 45c:	0e 94 33 03 	call	0x666	; 0x666 <I2C_sendAddress>
+
+	// 4. I2CNT set. Status code indicates SLA+W sent, ACK received
+	// 5. Check TWSR to see if SLA+W was sent and ACK received. Application
+	// loads data into TWDR, and loads appropriate control signals into TWCR,
+	// making sure that I2CNT is written to one
+	if (!I2C_getFlagStatus(I2C_FLAG_MT_SLA_W_ACK))
+ 460:	88 e1       	ldi	r24, 0x18	; 24
+ 462:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 466:	88 23       	and	r24, r24
+ 468:	11 f4       	brne	.+4      	; 0x46e <MCAL_I2C_masterTx+0x72>
+		return FALSE;
+ 46a:	1f 86       	std	Y+15, r1	; 0x0f
+ 46c:	3f c0       	rjmp	.+126    	; 0x4ec <MCAL_I2C_masterTx+0xf0>
+
+	// Send Data
+	for (i = 0; i < dataLength; i++) {
+ 46e:	19 82       	std	Y+1, r1	; 0x01
+ 470:	1a 82       	std	Y+2, r1	; 0x02
+ 472:	1b 82       	std	Y+3, r1	; 0x03
+ 474:	1c 82       	std	Y+4, r1	; 0x04
+ 476:	26 c0       	rjmp	.+76     	; 0x4c4 <MCAL_I2C_masterTx+0xc8>
+		// Bits 7..0 TWD: I2C Data Register
+		TWDR = dataTx[i];
+ 478:	a3 e2       	ldi	r26, 0x23	; 35
+ 47a:	b0 e0       	ldi	r27, 0x00	; 0
+ 47c:	29 81       	ldd	r18, Y+1	; 0x01
+ 47e:	3a 81       	ldd	r19, Y+2	; 0x02
+ 480:	8f 81       	ldd	r24, Y+7	; 0x07
+ 482:	98 85       	ldd	r25, Y+8	; 0x08
+ 484:	fc 01       	movw	r30, r24
+ 486:	e2 0f       	add	r30, r18
+ 488:	f3 1f       	adc	r31, r19
+ 48a:	80 81       	ld	r24, Z
+ 48c:	8c 93       	st	X, r24
+
+		TWCR = (1 << TWINT) | (1 << TWEN);
+ 48e:	e6 e5       	ldi	r30, 0x56	; 86
+ 490:	f0 e0       	ldi	r31, 0x00	; 0
+ 492:	84 e8       	ldi	r24, 0x84	; 132
+ 494:	80 83       	st	Z, r24
+
+		// 6. I2CNT set. Status code indicates data sent, ACK received
+		// 7. Check TWSR to see if data was sent and ACK received.
+		while (!I2C_getFlagStatus(I2C_FLAG_TWINT))
+ 496:	80 e0       	ldi	r24, 0x00	; 0
+ 498:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 49c:	88 23       	and	r24, r24
+ 49e:	d9 f3       	breq	.-10     	; 0x496 <MCAL_I2C_masterTx+0x9a>
+			;
+		if (!I2C_getFlagStatus(I2C_FLAG_MT_DATA_ACK))
+ 4a0:	88 e2       	ldi	r24, 0x28	; 40
+ 4a2:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 4a6:	88 23       	and	r24, r24
+ 4a8:	11 f4       	brne	.+4      	; 0x4ae <MCAL_I2C_masterTx+0xb2>
+			return FALSE;
+ 4aa:	1f 86       	std	Y+15, r1	; 0x0f
+ 4ac:	1f c0       	rjmp	.+62     	; 0x4ec <MCAL_I2C_masterTx+0xf0>
+	// making sure that I2CNT is written to one
+	if (!I2C_getFlagStatus(I2C_FLAG_MT_SLA_W_ACK))
+		return FALSE;
+
+	// Send Data
+	for (i = 0; i < dataLength; i++) {
+ 4ae:	89 81       	ldd	r24, Y+1	; 0x01
+ 4b0:	9a 81       	ldd	r25, Y+2	; 0x02
+ 4b2:	ab 81       	ldd	r26, Y+3	; 0x03
+ 4b4:	bc 81       	ldd	r27, Y+4	; 0x04
+ 4b6:	01 96       	adiw	r24, 0x01	; 1
+ 4b8:	a1 1d       	adc	r26, r1
+ 4ba:	b1 1d       	adc	r27, r1
+ 4bc:	89 83       	std	Y+1, r24	; 0x01
+ 4be:	9a 83       	std	Y+2, r25	; 0x02
+ 4c0:	ab 83       	std	Y+3, r26	; 0x03
+ 4c2:	bc 83       	std	Y+4, r27	; 0x04
+ 4c4:	29 81       	ldd	r18, Y+1	; 0x01
+ 4c6:	3a 81       	ldd	r19, Y+2	; 0x02
+ 4c8:	4b 81       	ldd	r20, Y+3	; 0x03
+ 4ca:	5c 81       	ldd	r21, Y+4	; 0x04
+ 4cc:	89 85       	ldd	r24, Y+9	; 0x09
+ 4ce:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 4d0:	ab 85       	ldd	r26, Y+11	; 0x0b
+ 4d2:	bc 85       	ldd	r27, Y+12	; 0x0c
+ 4d4:	28 17       	cp	r18, r24
+ 4d6:	39 07       	cpc	r19, r25
+ 4d8:	4a 07       	cpc	r20, r26
+ 4da:	5b 07       	cpc	r21, r27
+ 4dc:	68 f2       	brcs	.-102    	; 0x478 <MCAL_I2C_masterTx+0x7c>
+	}
+
+	// Application loads appropriate control signals to send STOP
+	// into TWCR, making sure that I2CNT is written to one
+	// Stop Condition
+	if (stopCondition == I2C_STOP_WITH) {
+ 4de:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 4e0:	81 30       	cpi	r24, 0x01	; 1
+ 4e2:	11 f4       	brne	.+4      	; 0x4e8 <MCAL_I2C_masterTx+0xec>
+		// Bit 4 TWSTO: I2C STOP Condition Bit
+		I2C_generateStop();
+ 4e4:	0e 94 73 03 	call	0x6e6	; 0x6e6 <I2C_generateStop>
+	}
+	return TRUE;
+ 4e8:	81 e0       	ldi	r24, 0x01	; 1
+ 4ea:	8f 87       	std	Y+15, r24	; 0x0f
+ 4ec:	8f 85       	ldd	r24, Y+15	; 0x0f
+}
+ 4ee:	2f 96       	adiw	r28, 0x0f	; 15
+ 4f0:	0f b6       	in	r0, 0x3f	; 63
+ 4f2:	f8 94       	cli
+ 4f4:	de bf       	out	0x3e, r29	; 62
+ 4f6:	0f be       	out	0x3f, r0	; 63
+ 4f8:	cd bf       	out	0x3d, r28	; 61
+ 4fa:	cf 91       	pop	r28
+ 4fc:	df 91       	pop	r29
+ 4fe:	0f 91       	pop	r16
+ 500:	ef 90       	pop	r14
+ 502:	08 95       	ret
+
+00000504 <MCAL_I2C_masterRx>:
+// @param[out]  dataRx  		The data to be received.
+// @param[in]  stopCondition 	Receive with or without a stop bit.
+// @param[in]  startCondition 	Receive with a repeated start or not.
+// @return	   Return 0 if error occurred
+uint8 MCAL_I2C_masterRx(uint16 slaveAddress, uint8 *dataRx, uint32 dataLength,
+		uint8 stopCondition, uint8 startCondition) {
+ 504:	ef 92       	push	r14
+ 506:	0f 93       	push	r16
+ 508:	df 93       	push	r29
+ 50a:	cf 93       	push	r28
+ 50c:	cd b7       	in	r28, 0x3d	; 61
+ 50e:	de b7       	in	r29, 0x3e	; 62
+ 510:	2f 97       	sbiw	r28, 0x0f	; 15
+ 512:	0f b6       	in	r0, 0x3f	; 63
+ 514:	f8 94       	cli
+ 516:	de bf       	out	0x3e, r29	; 62
+ 518:	0f be       	out	0x3f, r0	; 63
+ 51a:	cd bf       	out	0x3d, r28	; 61
+ 51c:	9e 83       	std	Y+6, r25	; 0x06
+ 51e:	8d 83       	std	Y+5, r24	; 0x05
+ 520:	78 87       	std	Y+8, r23	; 0x08
+ 522:	6f 83       	std	Y+7, r22	; 0x07
+ 524:	29 87       	std	Y+9, r18	; 0x09
+ 526:	3a 87       	std	Y+10, r19	; 0x0a
+ 528:	4b 87       	std	Y+11, r20	; 0x0b
+ 52a:	5c 87       	std	Y+12, r21	; 0x0c
+ 52c:	0d 87       	std	Y+13, r16	; 0x0d
+ 52e:	ee 86       	std	Y+14, r14	; 0x0e
+	uint32 i = 0;
+ 530:	19 82       	std	Y+1, r1	; 0x01
+ 532:	1a 82       	std	Y+2, r1	; 0x02
+ 534:	1b 82       	std	Y+3, r1	; 0x03
+ 536:	1c 82       	std	Y+4, r1	; 0x04
+
+	// 1. Application writes to TWCR to initiate transmission of START
+	// 2. I2CNT set. Status code indicates START condition sent
+	I2C_generateStart();
+ 538:	0e 94 63 03 	call	0x6c6	; 0x6c6 <I2C_generateStart>
+
+	// 3. Check TWSR to see if START was sent.
+	if (startCondition == I2C_START_NORMAL) {
+ 53c:	8e 85       	ldd	r24, Y+14	; 0x0e
+ 53e:	88 23       	and	r24, r24
+ 540:	39 f4       	brne	.+14     	; 0x550 <MCAL_I2C_masterRx+0x4c>
+		if (!I2C_getFlagStatus(I2C_FLAG_MT_START))
+ 542:	88 e0       	ldi	r24, 0x08	; 8
+ 544:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 548:	88 23       	and	r24, r24
+ 54a:	49 f4       	brne	.+18     	; 0x55e <MCAL_I2C_masterRx+0x5a>
+			return FALSE;
+ 54c:	1f 86       	std	Y+15, r1	; 0x0f
+ 54e:	5b c0       	rjmp	.+182    	; 0x606 <MCAL_I2C_masterRx+0x102>
+	} else {
+		if (!I2C_getFlagStatus(I2C_FLAG_MT_REP_START))
+ 550:	80 e1       	ldi	r24, 0x10	; 16
+ 552:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 556:	88 23       	and	r24, r24
+ 558:	11 f4       	brne	.+4      	; 0x55e <MCAL_I2C_masterRx+0x5a>
+			return FALSE;
+ 55a:	1f 86       	std	Y+15, r1	; 0x0f
+ 55c:	54 c0       	rjmp	.+168    	; 0x606 <MCAL_I2C_masterRx+0x102>
+	}
+
+	// Application loads SLA+R into TWDR, and loads appropriate control signals into TWCR,
+	// making sure that I2CNT is written to one, and TWSTA is written to zero
+	I2C_sendAddress(slaveAddress, I2C_DIRECTION_RECEIVER);
+ 55e:	8d 81       	ldd	r24, Y+5	; 0x05
+ 560:	9e 81       	ldd	r25, Y+6	; 0x06
+ 562:	61 e0       	ldi	r22, 0x01	; 1
+ 564:	0e 94 33 03 	call	0x666	; 0x666 <I2C_sendAddress>
+
+	// 4. I2CNT set. Status code indicates SLA+R sent, ACK received
+	// 5. Check TWSR to see if SLA+W was sent and ACK received. Application
+	// loads data into TWDR, and loads appropriate control signals into TWCR,
+	// making sure that I2CNT is written to one
+	if (!I2C_getFlagStatus(I2C_FLAG_MR_SLA_R_ACK))
+ 568:	80 e4       	ldi	r24, 0x40	; 64
+ 56a:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 56e:	88 23       	and	r24, r24
+ 570:	11 f4       	brne	.+4      	; 0x576 <MCAL_I2C_masterRx+0x72>
+		return FALSE;
+ 572:	1f 86       	std	Y+15, r1	; 0x0f
+ 574:	48 c0       	rjmp	.+144    	; 0x606 <MCAL_I2C_masterRx+0x102>
+
+	// Receive data
+	for (i = 0; i < dataLength; i++) {
+ 576:	19 82       	std	Y+1, r1	; 0x01
+ 578:	1a 82       	std	Y+2, r1	; 0x02
+ 57a:	1b 82       	std	Y+3, r1	; 0x03
+ 57c:	1c 82       	std	Y+4, r1	; 0x04
+ 57e:	2f c0       	rjmp	.+94     	; 0x5de <MCAL_I2C_masterRx+0xda>
+		// Bits 7..0 TWD: I2C Data Register
+		dataRx[i] = TWDR;
+ 580:	29 81       	ldd	r18, Y+1	; 0x01
+ 582:	3a 81       	ldd	r19, Y+2	; 0x02
+ 584:	8f 81       	ldd	r24, Y+7	; 0x07
+ 586:	98 85       	ldd	r25, Y+8	; 0x08
+ 588:	dc 01       	movw	r26, r24
+ 58a:	a2 0f       	add	r26, r18
+ 58c:	b3 1f       	adc	r27, r19
+ 58e:	e3 e2       	ldi	r30, 0x23	; 35
+ 590:	f0 e0       	ldi	r31, 0x00	; 0
+ 592:	80 81       	ld	r24, Z
+ 594:	8c 93       	st	X, r24
+		if (I2C_g_config.ACK_control == I2C_ACK_CONTROL_ENABLE) {
+ 596:	80 91 64 00 	lds	r24, 0x0064
+ 59a:	80 34       	cpi	r24, 0x40	; 64
+ 59c:	29 f4       	brne	.+10     	; 0x5a8 <MCAL_I2C_masterRx+0xa4>
+			TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWEA);
+ 59e:	e6 e5       	ldi	r30, 0x56	; 86
+ 5a0:	f0 e0       	ldi	r31, 0x00	; 0
+ 5a2:	84 ec       	ldi	r24, 0xC4	; 196
+ 5a4:	80 83       	st	Z, r24
+ 5a6:	04 c0       	rjmp	.+8      	; 0x5b0 <MCAL_I2C_masterRx+0xac>
+		} else {
+			TWCR = (1 << TWINT) | (1 << TWEN);
+ 5a8:	e6 e5       	ldi	r30, 0x56	; 86
+ 5aa:	f0 e0       	ldi	r31, 0x00	; 0
+ 5ac:	84 e8       	ldi	r24, 0x84	; 132
+ 5ae:	80 83       	st	Z, r24
+		}
+
+		// 6. I2CNT set. Status code indicates data received, ACK sent
+		// 7. Check TWSR to see if data was received and ACK sent.
+		while (!I2C_getFlagStatus(I2C_FLAG_TWINT))
+ 5b0:	80 e0       	ldi	r24, 0x00	; 0
+ 5b2:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 5b6:	88 23       	and	r24, r24
+ 5b8:	d9 f3       	breq	.-10     	; 0x5b0 <MCAL_I2C_masterRx+0xac>
+			;
+		if (!I2C_getFlagStatus(I2C_FLAG_MR_DATA_ACK))
+ 5ba:	80 e5       	ldi	r24, 0x50	; 80
+ 5bc:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 5c0:	88 23       	and	r24, r24
+ 5c2:	11 f4       	brne	.+4      	; 0x5c8 <MCAL_I2C_masterRx+0xc4>
+			return FALSE;
+ 5c4:	1f 86       	std	Y+15, r1	; 0x0f
+ 5c6:	1f c0       	rjmp	.+62     	; 0x606 <MCAL_I2C_masterRx+0x102>
+	// making sure that I2CNT is written to one
+	if (!I2C_getFlagStatus(I2C_FLAG_MR_SLA_R_ACK))
+		return FALSE;
+
+	// Receive data
+	for (i = 0; i < dataLength; i++) {
+ 5c8:	89 81       	ldd	r24, Y+1	; 0x01
+ 5ca:	9a 81       	ldd	r25, Y+2	; 0x02
+ 5cc:	ab 81       	ldd	r26, Y+3	; 0x03
+ 5ce:	bc 81       	ldd	r27, Y+4	; 0x04
+ 5d0:	01 96       	adiw	r24, 0x01	; 1
+ 5d2:	a1 1d       	adc	r26, r1
+ 5d4:	b1 1d       	adc	r27, r1
+ 5d6:	89 83       	std	Y+1, r24	; 0x01
+ 5d8:	9a 83       	std	Y+2, r25	; 0x02
+ 5da:	ab 83       	std	Y+3, r26	; 0x03
+ 5dc:	bc 83       	std	Y+4, r27	; 0x04
+ 5de:	29 81       	ldd	r18, Y+1	; 0x01
+ 5e0:	3a 81       	ldd	r19, Y+2	; 0x02
+ 5e2:	4b 81       	ldd	r20, Y+3	; 0x03
+ 5e4:	5c 81       	ldd	r21, Y+4	; 0x04
+ 5e6:	89 85       	ldd	r24, Y+9	; 0x09
+ 5e8:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 5ea:	ab 85       	ldd	r26, Y+11	; 0x0b
+ 5ec:	bc 85       	ldd	r27, Y+12	; 0x0c
+ 5ee:	28 17       	cp	r18, r24
+ 5f0:	39 07       	cpc	r19, r25
+ 5f2:	4a 07       	cpc	r20, r26
+ 5f4:	5b 07       	cpc	r21, r27
+ 5f6:	20 f2       	brcs	.-120    	; 0x580 <MCAL_I2C_masterRx+0x7c>
+	}
+
+	// Application loads appropriate control signals to send STOP
+	// into TWCR, making sure that I2CNT is written to one
+	// Stop Condition
+	if (stopCondition == I2C_STOP_WITH) {
+ 5f8:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 5fa:	81 30       	cpi	r24, 0x01	; 1
+ 5fc:	11 f4       	brne	.+4      	; 0x602 <MCAL_I2C_masterRx+0xfe>
+		// Bit 4 TWSTO: I2C STOP Condition Bit
+		I2C_generateStop();
+ 5fe:	0e 94 73 03 	call	0x6e6	; 0x6e6 <I2C_generateStop>
+	}
+	return TRUE;
+ 602:	81 e0       	ldi	r24, 0x01	; 1
+ 604:	8f 87       	std	Y+15, r24	; 0x0f
+ 606:	8f 85       	ldd	r24, Y+15	; 0x0f
+}
+ 608:	2f 96       	adiw	r28, 0x0f	; 15
+ 60a:	0f b6       	in	r0, 0x3f	; 63
+ 60c:	f8 94       	cli
+ 60e:	de bf       	out	0x3e, r29	; 62
+ 610:	0f be       	out	0x3f, r0	; 63
+ 612:	cd bf       	out	0x3d, r28	; 61
+ 614:	cf 91       	pop	r28
+ 616:	df 91       	pop	r29
+ 618:	0f 91       	pop	r16
+ 61a:	ef 90       	pop	r14
+ 61c:	08 95       	ret
+
+0000061e <MCAL_I2C_slaveTx>:
+
+// Slave with interrupt
+// @brief Slave sends data
+// @param[in]  dataTx  			The data to be sent.
+void MCAL_I2C_slaveTx(uint8 *dataTx) {
+ 61e:	df 93       	push	r29
+ 620:	cf 93       	push	r28
+ 622:	00 d0       	rcall	.+0      	; 0x624 <MCAL_I2C_slaveTx+0x6>
+ 624:	cd b7       	in	r28, 0x3d	; 61
+ 626:	de b7       	in	r29, 0x3e	; 62
+ 628:	9a 83       	std	Y+2, r25	; 0x02
+ 62a:	89 83       	std	Y+1, r24	; 0x01
+	// Bits 7..0 TWD: I2C Data Register
+	TWDR = *dataTx;
+ 62c:	e3 e2       	ldi	r30, 0x23	; 35
+ 62e:	f0 e0       	ldi	r31, 0x00	; 0
+ 630:	a9 81       	ldd	r26, Y+1	; 0x01
+ 632:	ba 81       	ldd	r27, Y+2	; 0x02
+ 634:	8c 91       	ld	r24, X
+ 636:	80 83       	st	Z, r24
+}
+ 638:	0f 90       	pop	r0
+ 63a:	0f 90       	pop	r0
+ 63c:	cf 91       	pop	r28
+ 63e:	df 91       	pop	r29
+ 640:	08 95       	ret
+
+00000642 <MCAL_I2C_slaveRx>:
+
+// @brief Slave receives data
+// @param[out] dataRx  			The data to be received.
+void MCAL_I2C_slaveRx(uint8 *dataRx) {
+ 642:	df 93       	push	r29
+ 644:	cf 93       	push	r28
+ 646:	00 d0       	rcall	.+0      	; 0x648 <MCAL_I2C_slaveRx+0x6>
+ 648:	cd b7       	in	r28, 0x3d	; 61
+ 64a:	de b7       	in	r29, 0x3e	; 62
+ 64c:	9a 83       	std	Y+2, r25	; 0x02
+ 64e:	89 83       	std	Y+1, r24	; 0x01
+	// Bits 7..0 TWD: I2C Data Register
+	*dataRx = TWDR;
+ 650:	e3 e2       	ldi	r30, 0x23	; 35
+ 652:	f0 e0       	ldi	r31, 0x00	; 0
+ 654:	80 81       	ld	r24, Z
+ 656:	e9 81       	ldd	r30, Y+1	; 0x01
+ 658:	fa 81       	ldd	r31, Y+2	; 0x02
+ 65a:	80 83       	st	Z, r24
+}
+ 65c:	0f 90       	pop	r0
+ 65e:	0f 90       	pop	r0
+ 660:	cf 91       	pop	r28
+ 662:	df 91       	pop	r29
+ 664:	08 95       	ret
+
+00000666 <I2C_sendAddress>:
+
+// @brief Send an address
+// @param[in]  address  		The address to be sent.
+// @param[in]  directionMode  	Reading/Writing to the address.
+void I2C_sendAddress(uint16 address, uint8 directionMode) {
+ 666:	df 93       	push	r29
+ 668:	cf 93       	push	r28
+ 66a:	00 d0       	rcall	.+0      	; 0x66c <I2C_sendAddress+0x6>
+ 66c:	0f 92       	push	r0
+ 66e:	cd b7       	in	r28, 0x3d	; 61
+ 670:	de b7       	in	r29, 0x3e	; 62
+ 672:	9a 83       	std	Y+2, r25	; 0x02
+ 674:	89 83       	std	Y+1, r24	; 0x01
+ 676:	6b 83       	std	Y+3, r22	; 0x03
+	// Shift left by 1 to leave a space for the direction bit
+	address <<= 1;
+ 678:	89 81       	ldd	r24, Y+1	; 0x01
+ 67a:	9a 81       	ldd	r25, Y+2	; 0x02
+ 67c:	88 0f       	add	r24, r24
+ 67e:	99 1f       	adc	r25, r25
+ 680:	9a 83       	std	Y+2, r25	; 0x02
+ 682:	89 83       	std	Y+1, r24	; 0x01
+
+	if (directionMode == I2C_DIRECTION_RECEIVER) {
+ 684:	8b 81       	ldd	r24, Y+3	; 0x03
+ 686:	81 30       	cpi	r24, 0x01	; 1
+ 688:	31 f4       	brne	.+12     	; 0x696 <I2C_sendAddress+0x30>
+		// Read 1
+		address |= (1 << 0);
+ 68a:	89 81       	ldd	r24, Y+1	; 0x01
+ 68c:	9a 81       	ldd	r25, Y+2	; 0x02
+ 68e:	81 60       	ori	r24, 0x01	; 1
+ 690:	9a 83       	std	Y+2, r25	; 0x02
+ 692:	89 83       	std	Y+1, r24	; 0x01
+ 694:	05 c0       	rjmp	.+10     	; 0x6a0 <I2C_sendAddress+0x3a>
+	} else {
+		// Write 0
+		address &= ~(1 << 0);
+ 696:	89 81       	ldd	r24, Y+1	; 0x01
+ 698:	9a 81       	ldd	r25, Y+2	; 0x02
+ 69a:	8e 7f       	andi	r24, 0xFE	; 254
+ 69c:	9a 83       	std	Y+2, r25	; 0x02
+ 69e:	89 83       	std	Y+1, r24	; 0x01
+	}
+	// Bits 7..0 TWD: I2C Data Register
+	TWDR = (uint8) address;
+ 6a0:	e3 e2       	ldi	r30, 0x23	; 35
+ 6a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 6a4:	89 81       	ldd	r24, Y+1	; 0x01
+ 6a6:	80 83       	st	Z, r24
+	TWCR = (1 << TWINT) | (1 << TWEN);
+ 6a8:	e6 e5       	ldi	r30, 0x56	; 86
+ 6aa:	f0 e0       	ldi	r31, 0x00	; 0
+ 6ac:	84 e8       	ldi	r24, 0x84	; 132
+ 6ae:	80 83       	st	Z, r24
+
+	while (!I2C_getFlagStatus(I2C_FLAG_TWINT))
+ 6b0:	80 e0       	ldi	r24, 0x00	; 0
+ 6b2:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 6b6:	88 23       	and	r24, r24
+ 6b8:	d9 f3       	breq	.-10     	; 0x6b0 <I2C_sendAddress+0x4a>
+		;
+}
+ 6ba:	0f 90       	pop	r0
+ 6bc:	0f 90       	pop	r0
+ 6be:	0f 90       	pop	r0
+ 6c0:	cf 91       	pop	r28
+ 6c2:	df 91       	pop	r29
+ 6c4:	08 95       	ret
+
+000006c6 <I2C_generateStart>:
+
+// @brief Send start bit
+// @param[in]  startCondition 	Send a repeated start or not.
+void I2C_generateStart(void) {
+ 6c6:	df 93       	push	r29
+ 6c8:	cf 93       	push	r28
+ 6ca:	cd b7       	in	r28, 0x3d	; 61
+ 6cc:	de b7       	in	r29, 0x3e	; 62
+	//must be cleared by software when the START condition has been transmitted.
+	// Immediately after the application has cleared I2CNT,
+	// the I2C will initiate transmission of the START condition.
+
+	// Bit 5 TWSTA: I2C START Condition Bit
+	TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
+ 6ce:	e6 e5       	ldi	r30, 0x56	; 86
+ 6d0:	f0 e0       	ldi	r31, 0x00	; 0
+ 6d2:	84 ea       	ldi	r24, 0xA4	; 164
+ 6d4:	80 83       	st	Z, r24
+
+	while (!I2C_getFlagStatus(I2C_FLAG_TWINT))
+ 6d6:	80 e0       	ldi	r24, 0x00	; 0
+ 6d8:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 6dc:	88 23       	and	r24, r24
+ 6de:	d9 f3       	breq	.-10     	; 0x6d6 <I2C_generateStart+0x10>
+		;
+}
+ 6e0:	cf 91       	pop	r28
+ 6e2:	df 91       	pop	r29
+ 6e4:	08 95       	ret
+
+000006e6 <I2C_generateStop>:
+
+// @brief Send stop bit
+void I2C_generateStop(void) {
+ 6e6:	df 93       	push	r29
+ 6e8:	cf 93       	push	r28
+ 6ea:	cd b7       	in	r28, 0x3d	; 61
+ 6ec:	de b7       	in	r29, 0x3e	; 62
+	//slave mode and releases the SCL and SDA lines to a high impedance state.
+	// Immediately after the application has cleared I2CNT,
+	// the I2C will initiate transmission of the STOP condition.
+
+	// Bit 4 TWSTO: I2C STOP Condition Bit
+	TWCR = (1 << TWINT) | (1 << TWSTO) | (1 << TWEN);
+ 6ee:	e6 e5       	ldi	r30, 0x56	; 86
+ 6f0:	f0 e0       	ldi	r31, 0x00	; 0
+ 6f2:	84 e9       	ldi	r24, 0x94	; 148
+ 6f4:	80 83       	st	Z, r24
+}
+ 6f6:	cf 91       	pop	r28
+ 6f8:	df 91       	pop	r29
+ 6fa:	08 95       	ret
+
+000006fc <I2C_getFlagStatus>:
+
+// @brief Return the status of a flag
+// @param[in]  flag  		The flag to be checked.
+// @return	   The value of flag status
+uint8 I2C_getFlagStatus(uint8 flag) {
+ 6fc:	df 93       	push	r29
+ 6fe:	cf 93       	push	r28
+ 700:	00 d0       	rcall	.+0      	; 0x702 <I2C_getFlagStatus+0x6>
+ 702:	0f 92       	push	r0
+ 704:	cd b7       	in	r28, 0x3d	; 61
+ 706:	de b7       	in	r29, 0x3e	; 62
+ 708:	8b 83       	std	Y+3, r24	; 0x03
+	uint8 statusValue = I2C_FLAG_STATUS_RESET;
+ 70a:	1a 82       	std	Y+2, r1	; 0x02
+	uint8 status = TWSR & 0xF8;
+ 70c:	e1 e2       	ldi	r30, 0x21	; 33
+ 70e:	f0 e0       	ldi	r31, 0x00	; 0
+ 710:	80 81       	ld	r24, Z
+ 712:	88 7f       	andi	r24, 0xF8	; 248
+ 714:	89 83       	std	Y+1, r24	; 0x01
+
+	if (flag == I2C_FLAG_TWINT) {
+ 716:	8b 81       	ldd	r24, Y+3	; 0x03
+ 718:	88 23       	and	r24, r24
+ 71a:	49 f4       	brne	.+18     	; 0x72e <I2C_getFlagStatus+0x32>
+		statusValue = (TWCR & (1 << TWINT)) ?
+ 71c:	e6 e5       	ldi	r30, 0x56	; 86
+ 71e:	f0 e0       	ldi	r31, 0x00	; 0
+ 720:	80 81       	ld	r24, Z
+ 722:	1a 82       	std	Y+2, r1	; 0x02
+ 724:	88 23       	and	r24, r24
+ 726:	54 f4       	brge	.+20     	; 0x73c <I2C_getFlagStatus+0x40>
+ 728:	81 e0       	ldi	r24, 0x01	; 1
+ 72a:	8a 83       	std	Y+2, r24	; 0x02
+ 72c:	07 c0       	rjmp	.+14     	; 0x73c <I2C_getFlagStatus+0x40>
+		I2C_FLAG_STATUS_SET :
+												I2C_FLAG_STATUS_RESET;
+	} else {
+		statusValue = (status == flag) ?
+ 72e:	1a 82       	std	Y+2, r1	; 0x02
+ 730:	99 81       	ldd	r25, Y+1	; 0x01
+ 732:	8b 81       	ldd	r24, Y+3	; 0x03
+ 734:	98 17       	cp	r25, r24
+ 736:	11 f4       	brne	.+4      	; 0x73c <I2C_getFlagStatus+0x40>
+ 738:	81 e0       	ldi	r24, 0x01	; 1
+ 73a:	8a 83       	std	Y+2, r24	; 0x02
+		I2C_FLAG_STATUS_SET :
+											I2C_FLAG_STATUS_RESET;
+	}
+	return statusValue;
+ 73c:	8a 81       	ldd	r24, Y+2	; 0x02
+}
+ 73e:	0f 90       	pop	r0
+ 740:	0f 90       	pop	r0
+ 742:	0f 90       	pop	r0
+ 744:	cf 91       	pop	r28
+ 746:	df 91       	pop	r29
+ 748:	08 95       	ret
+
+0000074a <__vector_19>:
+
+//*****************************************************************************
+// IRQHandler Definitions
+//*****************************************************************************
+ISR(TWI_vect) {
+ 74a:	1f 92       	push	r1
+ 74c:	0f 92       	push	r0
+ 74e:	0f b6       	in	r0, 0x3f	; 63
+ 750:	0f 92       	push	r0
+ 752:	11 24       	eor	r1, r1
+ 754:	2f 93       	push	r18
+ 756:	3f 93       	push	r19
+ 758:	4f 93       	push	r20
+ 75a:	5f 93       	push	r21
+ 75c:	6f 93       	push	r22
+ 75e:	7f 93       	push	r23
+ 760:	8f 93       	push	r24
+ 762:	9f 93       	push	r25
+ 764:	af 93       	push	r26
+ 766:	bf 93       	push	r27
+ 768:	ef 93       	push	r30
+ 76a:	ff 93       	push	r31
+ 76c:	df 93       	push	r29
+ 76e:	cf 93       	push	r28
+ 770:	cd b7       	in	r28, 0x3d	; 61
+ 772:	de b7       	in	r29, 0x3e	; 62
+	//this flag starts the operation of the I2C, so all accesses to the I2C Address Register (TWAR),
+	//I2C Status Register (TWSR), and I2C Data Register (TWDR) must be complete before clearing
+	//this flag.
+
+	// Slave mode
+	if (I2C_g_config.deviceMode == I2C_DEVICE_MODE_SLAVE) {
+ 774:	80 91 61 00 	lds	r24, 0x0061
+ 778:	81 30       	cpi	r24, 0x01	; 1
+ 77a:	b1 f5       	brne	.+108    	; 0x7e8 <__vector_19+0x9e>
+		if (I2C_getFlagStatus(I2C_FLAG_SR_SLA_W_ACK)) {
+ 77c:	80 e6       	ldi	r24, 0x60	; 96
+ 77e:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 782:	88 23       	and	r24, r24
+ 784:	51 f0       	breq	.+20     	; 0x79a <__vector_19+0x50>
+			I2C_g_config.P_IRQ_callBack(I2C_EV_ADDR_MATCHED);
+ 786:	e0 91 67 00 	lds	r30, 0x0067
+ 78a:	f0 91 68 00 	lds	r31, 0x0068
+ 78e:	82 e0       	ldi	r24, 0x02	; 2
+ 790:	09 95       	icall
+			TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWEA) | (1 << TWIE);
+ 792:	e6 e5       	ldi	r30, 0x56	; 86
+ 794:	f0 e0       	ldi	r31, 0x00	; 0
+ 796:	85 ec       	ldi	r24, 0xC5	; 197
+ 798:	80 83       	st	Z, r24
+		}
+
+		if (I2C_getFlagStatus(I2C_FLAG_SR_DATA_ACK)) {
+ 79a:	80 e8       	ldi	r24, 0x80	; 128
+ 79c:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 7a0:	88 23       	and	r24, r24
+ 7a2:	51 f0       	breq	.+20     	; 0x7b8 <__vector_19+0x6e>
+			I2C_g_config.P_IRQ_callBack(I2C_EV_DATA_RX);
+ 7a4:	e0 91 67 00 	lds	r30, 0x0067
+ 7a8:	f0 91 68 00 	lds	r31, 0x0068
+ 7ac:	84 e0       	ldi	r24, 0x04	; 4
+ 7ae:	09 95       	icall
+			TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWEA) | (1 << TWIE);
+ 7b0:	e6 e5       	ldi	r30, 0x56	; 86
+ 7b2:	f0 e0       	ldi	r31, 0x00	; 0
+ 7b4:	85 ec       	ldi	r24, 0xC5	; 197
+ 7b6:	80 83       	st	Z, r24
+		}
+
+		if (I2C_getFlagStatus(I2C_FLAG_ST_SLA_R_ACK)) {
+ 7b8:	88 ea       	ldi	r24, 0xA8	; 168
+ 7ba:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 7be:	88 23       	and	r24, r24
+ 7c0:	21 f0       	breq	.+8      	; 0x7ca <__vector_19+0x80>
+			TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWEA) | (1 << TWIE);
+ 7c2:	e6 e5       	ldi	r30, 0x56	; 86
+ 7c4:	f0 e0       	ldi	r31, 0x00	; 0
+ 7c6:	85 ec       	ldi	r24, 0xC5	; 197
+ 7c8:	80 83       	st	Z, r24
+		}
+
+		if (I2C_getFlagStatus(I2C_FLAG_ST_DATA_ACK)) {
+ 7ca:	80 eb       	ldi	r24, 0xB0	; 176
+ 7cc:	0e 94 7e 03 	call	0x6fc	; 0x6fc <I2C_getFlagStatus>
+ 7d0:	88 23       	and	r24, r24
+ 7d2:	51 f0       	breq	.+20     	; 0x7e8 <__vector_19+0x9e>
+			I2C_g_config.P_IRQ_callBack(I2C_EV_DATA_TX);
+ 7d4:	e0 91 67 00 	lds	r30, 0x0067
+ 7d8:	f0 91 68 00 	lds	r31, 0x0068
+ 7dc:	83 e0       	ldi	r24, 0x03	; 3
+ 7de:	09 95       	icall
+			TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWEA) | (1 << TWIE);
+ 7e0:	e6 e5       	ldi	r30, 0x56	; 86
+ 7e2:	f0 e0       	ldi	r31, 0x00	; 0
+ 7e4:	85 ec       	ldi	r24, 0xC5	; 197
+ 7e6:	80 83       	st	Z, r24
+		}
+	}
+
+}
+ 7e8:	cf 91       	pop	r28
+ 7ea:	df 91       	pop	r29
+ 7ec:	ff 91       	pop	r31
+ 7ee:	ef 91       	pop	r30
+ 7f0:	bf 91       	pop	r27
+ 7f2:	af 91       	pop	r26
+ 7f4:	9f 91       	pop	r25
+ 7f6:	8f 91       	pop	r24
+ 7f8:	7f 91       	pop	r23
+ 7fa:	6f 91       	pop	r22
+ 7fc:	5f 91       	pop	r21
+ 7fe:	4f 91       	pop	r20
+ 800:	3f 91       	pop	r19
+ 802:	2f 91       	pop	r18
+ 804:	0f 90       	pop	r0
+ 806:	0f be       	out	0x3f, r0	; 63
+ 808:	0f 90       	pop	r0
+ 80a:	1f 90       	pop	r1
+ 80c:	18 95       	reti
+
+0000080e <I2CCallback>:
+//#define MASTER
+#define SLAVE
+
+uint8 data = 0;
+
+void I2CCallback(uint8 ev) {
+ 80e:	df 93       	push	r29
+ 810:	cf 93       	push	r28
+ 812:	0f 92       	push	r0
+ 814:	cd b7       	in	r28, 0x3d	; 61
+ 816:	de b7       	in	r29, 0x3e	; 62
+ 818:	89 83       	std	Y+1, r24	; 0x01
+	if(ev == I2C_EV_DATA_RX){
+ 81a:	89 81       	ldd	r24, Y+1	; 0x01
+ 81c:	84 30       	cpi	r24, 0x04	; 4
+ 81e:	21 f4       	brne	.+8      	; 0x828 <I2CCallback+0x1a>
+		MCAL_I2C_slaveRx(&data);
+ 820:	80 e6       	ldi	r24, 0x60	; 96
+ 822:	90 e0       	ldi	r25, 0x00	; 0
+ 824:	0e 94 21 03 	call	0x642	; 0x642 <MCAL_I2C_slaveRx>
+	}
+}
+ 828:	0f 90       	pop	r0
+ 82a:	cf 91       	pop	r28
+ 82c:	df 91       	pop	r29
+ 82e:	08 95       	ret
+
+00000830 <main>:
+
+int main(void) {
+ 830:	df 93       	push	r29
+ 832:	cf 93       	push	r28
+ 834:	cd b7       	in	r28, 0x3d	; 61
+ 836:	de b7       	in	r29, 0x3e	; 62
+ 838:	2a 97       	sbiw	r28, 0x0a	; 10
+ 83a:	0f b6       	in	r0, 0x3f	; 63
+ 83c:	f8 94       	cli
+ 83e:	de bf       	out	0x3e, r29	; 62
+ 840:	0f be       	out	0x3f, r0	; 63
+ 842:	cd bf       	out	0x3d, r28	; 61
+		data++;
+	}
+#endif
+
+#ifdef SLAVE
+	GPIO_PinConfig segment = {GPIO_PIN_All, GPIO_MODE_OUT};
+ 844:	8f ef       	ldi	r24, 0xFF	; 255
+ 846:	89 87       	std	Y+9, r24	; 0x09
+ 848:	83 e0       	ldi	r24, 0x03	; 3
+ 84a:	8a 87       	std	Y+10, r24	; 0x0a
+	MCAL_GPIO_init(GPIOA, &segment);
+ 84c:	9e 01       	movw	r18, r28
+ 84e:	27 5f       	subi	r18, 0xF7	; 247
+ 850:	3f 4f       	sbci	r19, 0xFF	; 255
+ 852:	89 e3       	ldi	r24, 0x39	; 57
+ 854:	90 e0       	ldi	r25, 0x00	; 0
+ 856:	b9 01       	movw	r22, r18
+ 858:	0e 94 3e 00 	call	0x7c	; 0x7c <MCAL_GPIO_init>
+
+	I2C.deviceMode = I2C_DEVICE_MODE_SLAVE;
+ 85c:	81 e0       	ldi	r24, 0x01	; 1
+ 85e:	89 83       	std	Y+1, r24	; 0x01
+	I2C.clkSpeed = I2C_CLK_SPEED_400KHZ;
+ 860:	82 e0       	ldi	r24, 0x02	; 2
+ 862:	8b 83       	std	Y+3, r24	; 0x03
+	I2C.generalCallAddressDetection = I2C_GCAD_DISABLE;
+ 864:	1d 82       	std	Y+5, r1	; 0x05
+	I2C.ACK_control = I2C_ACK_CONTROL_ENABLE;
+ 866:	80 e4       	ldi	r24, 0x40	; 64
+ 868:	8c 83       	std	Y+4, r24	; 0x04
+	I2C.IRQ_enable = I2C_IRQ_ENABLE;
+ 86a:	81 e0       	ldi	r24, 0x01	; 1
+ 86c:	8e 83       	std	Y+6, r24	; 0x06
+	I2C.P_IRQ_callBack = I2CCallback;
+ 86e:	87 e0       	ldi	r24, 0x07	; 7
+ 870:	94 e0       	ldi	r25, 0x04	; 4
+ 872:	98 87       	std	Y+8, r25	; 0x08
+ 874:	8f 83       	std	Y+7, r24	; 0x07
+	I2C.slaveAddress = 0b01101000;
+ 876:	88 e6       	ldi	r24, 0x68	; 104
+ 878:	8a 83       	std	Y+2, r24	; 0x02
+
+	IRQ_GLOBAL_ENABLE;
+ 87a:	af e5       	ldi	r26, 0x5F	; 95
+ 87c:	b0 e0       	ldi	r27, 0x00	; 0
+ 87e:	ef e5       	ldi	r30, 0x5F	; 95
+ 880:	f0 e0       	ldi	r31, 0x00	; 0
+ 882:	80 81       	ld	r24, Z
+ 884:	80 68       	ori	r24, 0x80	; 128
+ 886:	8c 93       	st	X, r24
+
+	MCAL_I2C_init(&I2C);
+ 888:	ce 01       	movw	r24, r28
+ 88a:	01 96       	adiw	r24, 0x01	; 1
+ 88c:	0e 94 65 01 	call	0x2ca	; 0x2ca <MCAL_I2C_init>
+	while (1) {
+		MCAL_GPIO_writePort(GPIOA, data);
+ 890:	20 91 60 00 	lds	r18, 0x0060
+ 894:	89 e3       	ldi	r24, 0x39	; 57
+ 896:	90 e0       	ldi	r25, 0x00	; 0
+ 898:	62 2f       	mov	r22, r18
+ 89a:	0e 94 3b 01 	call	0x276	; 0x276 <MCAL_GPIO_writePort>
+ 89e:	f8 cf       	rjmp	.-16     	; 0x890 <__stack+0x31>
+
+000008a0 <_exit>:
+ 8a0:	f8 94       	cli
+
+000008a2 <__stop_program>:
+ 8a2:	ff cf       	rjmp	.-2      	; 0x8a2 <__stop_program>
